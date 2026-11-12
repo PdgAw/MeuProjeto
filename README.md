@@ -86,7 +86,7 @@ Contas de gestão da demo não têm senha; disciplinas da demo usam códigos `DE
 | 1 | Banco de dados, RBAC e RLS ([docs](docs/database.md)) | ✅ |
 | 2 | Autenticação, convites (Edge Function), rotas protegidas | ✅ |
 | 3 | Experiência do Neoleader (navegação por cargo, dashboard, Neo Progress, Minha Jornada, trilha) | ✅ |
-| 4 | Acadêmico (disciplinas, aulas, presença, turmas, professores) | ⏳ |
+| 4 | Acadêmico (disciplinas, aulas, presença, entregas, turmas com alertas, professores) | ✅ |
 | 5 | Neomentoria, Meu Negócio, Plano de Execução | ⏳ |
 | 6 | Bancas/VC, Experiências Neo, Comunidade | ⏳ |
 | 7 | Chat realtime, comunicados, documentos, agenda, notificações | ⏳ |
