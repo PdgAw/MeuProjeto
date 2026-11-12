@@ -1,4 +1,4 @@
-import { Bell, CalendarClock, CheckCheck, ClipboardList, FileText, Megaphone, MessagesSquare, Presentation, Sparkles, type LucideIcon } from 'lucide-react'
+import { Bell, CalendarClock, CheckCheck, ClipboardList, FileText, Inbox, Megaphone, MessagesSquare, Presentation, Sparkles, type LucideIcon } from 'lucide-react'
 import { isToday } from 'date-fns'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { useNotificationActions, useNotifications } from './api'
 
 const ICON: Record<string, LucideIcon> = {
   message: MessagesSquare, lesson_new: Presentation, lesson_changed: CalendarClock, mentoring_new: Sparkles, mentoring_requested: Sparkles,
-  mentoring_soon: Sparkles, assignment_new: ClipboardList, deadline_soon: ClipboardList, document_new: FileText, announcement: Megaphone,
+  mentoring_soon: Sparkles, assignment_new: ClipboardList, deadline_soon: ClipboardList, document_new: FileText, announcement: Megaphone, request: Inbox,
 }
 
 export default function NotificationsPage() {

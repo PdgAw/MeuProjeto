@@ -8,12 +8,14 @@ interface SectionCardProps {
   title: ReactNode
   icon?: ReactNode
   action?: { label: string; to: string }
+  /** Free-form header control (e.g. a button opening a dialog). */
+  extra?: ReactNode
   className?: string
   contentClassName?: string
   children: ReactNode
 }
 
-export function SectionCard({ title, icon, action, className, contentClassName, children }: SectionCardProps) {
+export function SectionCard({ title, icon, action, extra, className, contentClassName, children }: SectionCardProps) {
   return (
     <Card className={cn('flex flex-col', className)}>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-3">
@@ -21,6 +23,7 @@ export function SectionCard({ title, icon, action, className, contentClassName, 
           {icon}
           {title}
         </CardTitle>
+        {extra}
         {action && (
           <Link to={action.to} className="flex items-center text-xs font-medium text-primary hover:underline">
             {action.label} <ChevronRight className="h-3.5 w-3.5" />

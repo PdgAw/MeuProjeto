@@ -493,4 +493,25 @@ end $$;
 select pg_temp.check(true, 'conversion cannot run twice (no duplicates)');
 reset role;
 
+-- ------------------------------------------------- Request notifications -----
+select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
+insert into public.service_requests (id, requester_id, type, subject) values ('5e000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', 'declaration', 'Declaração de matrícula');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+update public.service_requests set assigned_to = '00000000-0000-0000-0000-00000000000c', status = 'in_review' where id = '5e000000-0000-0000-0000-000000000001';
+insert into public.service_request_comments (request_id, author_id, body, is_internal) values ('5e000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-00000000000c', 'Conferir histórico antes', true);
+insert into public.service_request_comments (request_id, author_id, body) values ('5e000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-00000000000c', 'Pode confirmar o CPF?');
+update public.service_requests set status = 'awaiting_user' where id = '5e000000-0000-0000-0000-000000000001';
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
+select pg_temp.check((select count(*) from public.notifications where type = 'request') = 3, 'requester notified of status changes and public reply (not the internal note)');
+select pg_temp.check(not exists (select 1 from public.notifications where type = 'request' and body like '%histórico%'), 'internal note never notifies the requester');
+select pg_temp.check((select count(*) from public.service_request_comments where request_id = '5e000000-0000-0000-0000-000000000001') = 1, 'requester sees only the public reply');
+insert into public.service_request_comments (request_id, author_id, body) values ('5e000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', 'CPF confirmado');
+update public.service_requests set status = 'in_review' where id = '5e000000-0000-0000-0000-000000000001';
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+select pg_temp.check((select count(*) from public.notifications where type = 'request' and link like '/gestao/solicitacoes%') = 1, 'assignee notified of the requester reply (not of own assignment)');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

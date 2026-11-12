@@ -1,7 +1,7 @@
 import {
   Award, BookOpen, Briefcase, CalendarDays, ClipboardList, FileText, FolderKanban, GraduationCap, Home,
   LayoutDashboard, Megaphone, MessagesSquare, Mountain, Network, Presentation, Route, Settings, Sparkles,
-  Sun, UserCircle, UserCog, Users, UsersRound, BarChart3, Inbox, type LucideIcon,
+  Sun, UserCircle, UserCog, Users, UsersRound, BarChart3, Inbox, Wallet, type LucideIcon,
 } from 'lucide-react'
 import type { DashboardKey, PermissionKey } from '@/features/auth/types'
 import { DASHBOARD_ROUTES } from './dashboards'
@@ -115,6 +115,7 @@ function managementNav(home: string): NavSection[] {
         { key: 'documents', label: 'Documentos', path: '/documentos', icon: FileText, permissions: ['documents.view'] },
         { key: 'admissions', label: 'Admissões', path: '/gestao/admissoes', icon: ClipboardList, permissions: ['admissions.view', 'admissions.committee'] },
         { key: 'requests', label: 'Solicitações', path: '/gestao/solicitacoes', icon: Inbox, permissions: ['requests.manage'] },
+        { key: 'finance', label: 'Financeiro', path: '/gestao/financeiro', icon: Wallet, permissions: ['finance.view'] },
         { key: 'reports', label: 'Relatórios', path: '/gestao/relatorios', icon: BarChart3, permissions: ['reports.view'] },
         { key: 'chat', label: 'Chat', path: '/chat', icon: MessagesSquare },
         { key: 'users', label: 'Usuários', path: '/gestao/usuarios', icon: UserCog, permissions: ['users.view'] },
@@ -132,12 +133,4 @@ export function navigationFor(dashboard: DashboardKey): NavSection[] {
     case 'mentor': return MENTOR
     default: return managementNav(DASHBOARD_ROUTES[dashboard])
   }
-}
-
-/** Every route that appears in any menu (used to register "em breve" placeholders). */
-export function allNavItems(): NavItem[] {
-  const dashboards: DashboardKey[] = ['neoleader', 'teacher', 'mentor', 'coordination', 'direction', 'secretary']
-  const seen = new Map<string, NavItem>()
-  for (const d of dashboards) for (const s of navigationFor(d)) for (const i of s.items) if (!seen.has(i.path)) seen.set(i.path, i)
-  return [...seen.values()]
 }

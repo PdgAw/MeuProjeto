@@ -25,6 +25,7 @@ export function BottomNav() {
           <NavLink
             key={key}
             to={path}
+            end={key === 'home'}
             className={({ isActive }) =>
               cn('flex flex-col items-center gap-1 py-2 text-[11px] font-medium', isActive ? 'text-primary' : 'text-muted-foreground')
             }
@@ -47,6 +48,7 @@ export function BottomNav() {
                 <NavLink
                   key={key}
                   to={path}
+                  end={key === 'home'}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(

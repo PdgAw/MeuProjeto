@@ -32,6 +32,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
               <NavLink
                 key={key}
                 to={path}
+                end={key === 'home'}
                 title={collapsed ? label : undefined}
                 className={({ isActive }) =>
                   cn(

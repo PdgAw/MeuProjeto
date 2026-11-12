@@ -19,6 +19,9 @@ Autorização é decidida no banco — o front-end apenas reflete o que o banco 
 | `1000_storage_realtime` | 9 buckets com políticas por pasta; Realtime em mensagens e notificações |
 | `1100_reference_data` | Cargos, permissões, trilhas, competências, disciplinas iniciais, milestones, KPIs, pesos do Neo Progress |
 | `1200_harden_function_privileges` | Visitantes (`anon`) não executam funções; triggers e jobs internos fora da API |
+| `1250`–`1820` | Correções e RPCs de leitura por fase: `student_journey`, `cohort_students`, `subject_results`, `mentor_mentees`, `student_achievements`, `my_conversations`, `announcement_recipients`, visibilidade de INSERT…RETURNING para criadores |
+| `1900_management` | RPCs `management_overview` (Coordenação), `executive_kpis` (Direção/Relatórios) e `create_agreement_with_installments` (Financeiro) |
+| `1910_request_notifications` | Notificações de Solicitações: status e respostas públicas para o solicitante; atribuição e respostas do solicitante para o responsável (notas internas nunca notificam) |
 
 ## Modelo de permissões
 

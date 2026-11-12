@@ -2,18 +2,14 @@ import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Outlet, RouterProvider, type RouteObject } from 'react-router-dom'
 import { AppShell } from '@/components/layout/AppShell'
 import { PageLoader } from '@/components/layout/PageLoader'
-import { allNavItems } from '@/config/navigation'
 import { AuthProvider } from '@/features/auth/AuthProvider'
 import { DashboardRedirect, RequireAuth, RequireGuest, RequirePermission } from '@/features/auth/components/guards'
-import type { DashboardKey } from '@/features/auth/types'
 
 const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'))
 const ForgotPasswordPage = lazy(() => import('@/features/auth/pages/ForgotPasswordPage'))
 const SetPasswordPage = lazy(() => import('@/features/auth/pages/SetPasswordPage'))
 const NoAccessPage = lazy(() => import('@/features/auth/pages/NoAccessPage'))
 const NotFoundPage = lazy(() => import('@/components/layout/NotFoundPage'))
-const ComingSoonPage = lazy(() => import('@/components/layout/ComingSoonPage'))
-const RoleHomePage = lazy(() => import('@/features/dashboard/RoleHomePage'))
 const NeoleaderDashboardPage = lazy(() => import('@/features/dashboard/neoleader/NeoleaderDashboardPage'))
 const JourneyPage = lazy(() => import('@/features/journey/pages/JourneyPage'))
 const TodayPage = lazy(() => import('@/features/today/TodayPage'))
@@ -54,6 +50,20 @@ const AnnouncementPage = lazy(() => import('@/features/announcements/pages/Annou
 const DocumentsPage = lazy(() => import('@/features/documents/pages/DocumentsPage'))
 const AgendaPage = lazy(() => import('@/features/agenda/pages/AgendaPage'))
 const NotificationsPage = lazy(() => import('@/features/notifications/NotificationsPage'))
+const CoordinationDashboardPage = lazy(() => import('@/features/management/pages/CoordinationDashboardPage'))
+const DirectionDashboardPage = lazy(() => import('@/features/management/pages/DirectionDashboardPage'))
+const SecretaryDashboardPage = lazy(() => import('@/features/management/pages/SecretaryDashboardPage'))
+const StudentsPage = lazy(() => import('@/features/students/pages/StudentsPage'))
+const Student360Page = lazy(() => import('@/features/students/pages/Student360Page'))
+const AdmissionsPage = lazy(() => import('@/features/admissions/pages/AdmissionsPage'))
+const CandidatePage = lazy(() => import('@/features/admissions/pages/CandidatePage'))
+const UsersPage = lazy(() => import('@/features/users/pages/UsersPage'))
+const UserAccessPage = lazy(() => import('@/features/users/pages/UserAccessPage'))
+const MyRequestsPage = lazy(() => import('@/features/requests/pages/MyRequestsPage'))
+const RequestsQueuePage = lazy(() => import('@/features/requests/pages/RequestsQueuePage'))
+const FinancePage = lazy(() => import('@/features/finance/pages/FinancePage'))
+const ReportsPage = lazy(() => import('@/features/reports/ReportsPage'))
+const SettingsPage = lazy(() => import('@/features/settings/SettingsPage'))
 
 function Root() {
   return (
@@ -65,7 +75,7 @@ function Root() {
   )
 }
 
-/** Modules delivered in this phase; every other menu entry gets an "em construção" page. */
+/** Every authenticated page, rendered inside the app shell. */
 const BUILT: RouteObject[] = [
   { path: '/inicio', element: <NeoleaderDashboardPage /> },
   { path: '/jornada', element: <JourneyPage /> },
@@ -149,23 +159,57 @@ const BUILT: RouteObject[] = [
   { path: '/documentos/:id', element: <DocumentsPage /> },
   { path: '/agenda', element: <AgendaPage /> },
   { path: '/notificacoes', element: <NotificationsPage /> },
-  { path: '/gestao/neoleaders/:id', element: <ComingSoonPage title="Perfil 360º do Neoleader" phase="Fase 8" /> },
-  ...(['coordination', 'direction', 'secretary'] as DashboardKey[]).map((d) => ({
-    path: { coordination: '/gestao', direction: '/direcao', secretary: '/secretaria' }[d as 'coordination' | 'direction' | 'secretary'],
-    element: <RoleHomePage dashboard={d} />,
-  })),
+  // Gestão (Phase 8)
+  { path: '/solicitacoes', element: <MyRequestsPage /> },
+  {
+    element: <RequirePermission permission={['reports.view', 'students.view', 'classes.view']} />,
+    children: [
+      { path: '/gestao', element: <CoordinationDashboardPage /> },
+      { path: '/direcao', element: <DirectionDashboardPage /> },
+    ],
+  },
+  {
+    element: <RequirePermission permission={['requests.manage', 'admissions.view', 'finance.view', 'students.view']} />,
+    children: [{ path: '/secretaria', element: <SecretaryDashboardPage /> }],
+  },
+  {
+    element: <RequirePermission permission="students.view" />,
+    children: [
+      { path: '/gestao/neoleaders', element: <StudentsPage /> },
+      { path: '/gestao/neoleaders/:id', element: <Student360Page /> },
+    ],
+  },
+  {
+    element: <RequirePermission permission={['admissions.view', 'admissions.committee']} />,
+    children: [
+      { path: '/gestao/admissoes', element: <AdmissionsPage /> },
+      { path: '/gestao/admissoes/:id', element: <CandidatePage /> },
+    ],
+  },
+  {
+    element: <RequirePermission permission="users.view" />,
+    children: [
+      { path: '/gestao/usuarios', element: <UsersPage /> },
+      { path: '/gestao/usuarios/:id', element: <UserAccessPage /> },
+    ],
+  },
+  {
+    element: <RequirePermission permission="requests.manage" />,
+    children: [{ path: '/gestao/solicitacoes', element: <RequestsQueuePage /> }],
+  },
+  {
+    element: <RequirePermission permission="finance.view" />,
+    children: [{ path: '/gestao/financeiro', element: <FinancePage /> }],
+  },
+  {
+    element: <RequirePermission permission="reports.view" />,
+    children: [{ path: '/gestao/relatorios', element: <ReportsPage /> }],
+  },
+  {
+    element: <RequirePermission permission={['settings.manage', 'permissions.manage']} />,
+    children: [{ path: '/gestao/configuracoes', element: <SettingsPage /> }],
+  },
 ]
-const builtPaths = new Set(BUILT.flatMap((r) => [r.path, ...(r.children ?? []).map((c) => c.path)]))
-const PHASE_BY_PREFIX: [RegExp, string][] = [
-  [/gestao|solicitacoes/, 'Fase 8'],
-]
-const placeholders: RouteObject[] = [...allNavItems(), { key: 'notifications', label: 'Notificações', path: '/notificacoes' }]
-  .filter((i) => !builtPaths.has(i.path))
-  .map((i) => ({
-    path: i.path,
-    element: <ComingSoonPage title={i.label} phase={PHASE_BY_PREFIX.find(([re]) => re.test(i.path))?.[1]} />,
-  }))
-
 const router = createBrowserRouter([
   {
     element: <Root />,
@@ -184,7 +228,7 @@ const router = createBrowserRouter([
         element: <RequireAuth />,
         children: [
           { path: '/', element: <DashboardRedirect /> },
-          { element: <AppShell />, children: [...BUILT, ...placeholders] },
+          { element: <AppShell />, children: BUILT },
         ],
       },
       { path: '*', element: <NotFoundPage /> },
