@@ -406,4 +406,32 @@ select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
 select pg_temp.check((select count(*) from public.my_conversations()) = 0, 'other cohort not in cohort room');
 reset role;
 
+-- ------------------------------------------- INSERT ... RETURNING (creator) ----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000d');
+with r as (insert into public.announcements (title, body, author_id, status) values ('Aviso da disciplina', 'x', '00000000-0000-0000-0000-00000000000d', 'published') returning id)
+select pg_temp.check((select count(*) from r) = 1, 'teacher gets own announcement back on insert');
+with r as (insert into public.documents (title, created_by) values ('Slides', '00000000-0000-0000-0000-00000000000d') returning id)
+select pg_temp.check((select count(*) from r) = 1, 'teacher gets own document back on insert');
+with r as (insert into public.calendar_events (title, starts_at, created_by) values ('Reunião', now(), '00000000-0000-0000-0000-00000000000d') returning id)
+select pg_temp.check((select count(*) from r) = 1, 'user gets own calendar event back on insert');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
+with r as (insert into public.ventures (owner_id, name) values ('00000000-0000-0000-0000-000000000002', 'Novo negócio') returning id)
+select pg_temp.check((select count(*) from r) = 1, 'neoleader gets own venture back on insert');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+with r as (insert into public.experiences (category, title, starts_at, owner_id, status) values ('workshop', 'Workshop', now() + interval '3 days', '00000000-0000-0000-0000-00000000000c', 'draft') returning id)
+select pg_temp.check((select count(*) from r) = 1, 'coordination gets new experience back on insert');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
+select pg_temp.check((select count(*) from public.ventures where name = 'Novo negócio') = 0, 'peer still cannot see that venture');
+reset role;
+
+-- ------------------------------------------------- Reach excludes the author ----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000d');
+insert into public.announcements (id, title, body, author_id, status) values ('50000000-0000-0000-0000-0000000000a1', 'Leitura', 'x', '00000000-0000-0000-0000-00000000000d', 'published');
+insert into public.announcement_targets (announcement_id, target_type, target_id) select '50000000-0000-0000-0000-0000000000a1', 'subject', id from public.subjects where code = 'EST';
+select pg_temp.check((select sent from public.announcement_stats('50000000-0000-0000-0000-0000000000a1')) = 2, 'teacher announcement reaches 2 students (author not counted)');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

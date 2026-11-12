@@ -48,6 +48,12 @@ const ExperiencePage = lazy(() => import('@/features/experiences/pages/Experienc
 const CommunityPage = lazy(() => import('@/features/community/pages/CommunityPage'))
 const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
 const AchievementsPage = lazy(() => import('@/features/achievements/AchievementsPage'))
+const ChatPage = lazy(() => import('@/features/chat/pages/ChatPage'))
+const AnnouncementsPage = lazy(() => import('@/features/announcements/pages/AnnouncementsPage'))
+const AnnouncementPage = lazy(() => import('@/features/announcements/pages/AnnouncementPage'))
+const DocumentsPage = lazy(() => import('@/features/documents/pages/DocumentsPage'))
+const AgendaPage = lazy(() => import('@/features/agenda/pages/AgendaPage'))
+const NotificationsPage = lazy(() => import('@/features/notifications/NotificationsPage'))
 
 function Root() {
   return (
@@ -134,6 +140,15 @@ const BUILT: RouteObject[] = [
   },
   { path: '/perfil', element: <ProfilePage /> },
   { path: '/conquistas', element: <AchievementsPage /> },
+  // Communication (Phase 7)
+  { path: '/chat', element: <ChatPage /> },
+  { path: '/chat/:id', element: <ChatPage /> },
+  { path: '/comunicados', element: <AnnouncementsPage /> },
+  { path: '/comunicados/:id', element: <AnnouncementPage /> },
+  { path: '/documentos', element: <DocumentsPage /> },
+  { path: '/documentos/:id', element: <DocumentsPage /> },
+  { path: '/agenda', element: <AgendaPage /> },
+  { path: '/notificacoes', element: <NotificationsPage /> },
   { path: '/gestao/neoleaders/:id', element: <ComingSoonPage title="Perfil 360º do Neoleader" phase="Fase 8" /> },
   ...(['coordination', 'direction', 'secretary'] as DashboardKey[]).map((d) => ({
     path: { coordination: '/gestao', direction: '/direcao', secretary: '/secretaria' }[d as 'coordination' | 'direction' | 'secretary'],
@@ -142,7 +157,6 @@ const BUILT: RouteObject[] = [
 ]
 const builtPaths = new Set(BUILT.flatMap((r) => [r.path, ...(r.children ?? []).map((c) => c.path)]))
 const PHASE_BY_PREFIX: [RegExp, string][] = [
-  [/chat|comunicados|documentos|agenda|notificacoes/, 'Fase 7'],
   [/gestao|solicitacoes/, 'Fase 8'],
 ]
 const placeholders: RouteObject[] = [...allNavItems(), { key: 'notifications', label: 'Notificações', path: '/notificacoes' }]

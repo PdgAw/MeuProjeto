@@ -1,4 +1,5 @@
-import { Check, ExternalLink, MapPin, MessagesSquare, Search, UserPlus, X } from 'lucide-react'
+import { StartChatButton } from '@/components/shared/StartChatButton'
+import { Check, ExternalLink, MapPin, Search, UserPlus, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -101,7 +102,7 @@ function PersonDialog({ person: p, me, connection, onClose }: { person: Person; 
           {p.linkedin_url && <a href={p.linkedin_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline"><ExternalLink className="h-4 w-4" />LinkedIn</a>}
           <div className="border-t pt-4">
             {connection?.status === 'accepted' ? (
-              <div className="flex flex-wrap items-center gap-2"><Badge variant="success"><Check className="h-3 w-3" />Conectados</Badge><Button size="sm" variant="outline" asChild><Link to="/chat"><MessagesSquare /> Conversar</Link></Button></div>
+              <div className="flex flex-wrap items-center gap-2"><Badge variant="success"><Check className="h-3 w-3" />Conectados</Badge><StartChatButton size="sm" variant="outline" userId={p.user_id} /></div>
             ) : connection?.status === 'pending' ? (
               <Badge variant="warning">{connection.incoming ? 'Pedido recebido: responda em Conexões' : 'Pedido enviado'}</Badge>
             ) : (
@@ -144,7 +145,7 @@ function ConnectionsTab({ all, incoming, connected }: { all: Connection[]; incom
       )}
       <section><h3 className="mb-2 text-sm font-semibold">Minhas conexões ({connected.length})</h3>
         {!connected.length ? <EmptyState text="Você ainda não tem conexões. Explore o diretório." /> : (
-          <ul className="divide-y rounded-lg border bg-card">{connected.map((c) => <Row key={c.id} c={c}><Button size="sm" variant="outline" asChild><Link to="/chat"><MessagesSquare /> Conversar</Link></Button></Row>)}</ul>
+          <ul className="divide-y rounded-lg border bg-card">{connected.map((c) => <Row key={c.id} c={c}>{c.other && <StartChatButton size="sm" variant="outline" userId={c.other.id} />}</Row>)}</ul>
         )}
       </section>
       {sent.length > 0 && (

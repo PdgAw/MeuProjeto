@@ -89,5 +89,5 @@ Contas de gestão da demo não têm senha; disciplinas da demo usam códigos `DE
 | 4 | Acadêmico (disciplinas, aulas, presença, entregas, turmas com alertas, professores) | ✅ |
 | 5 | Neomentoria (sessões, notas privadas, próximos passos, dashboard do Neomentor) e Meu Negócio (KPIs, milestones, Plano de Execução) | ✅ |
 | 6 | Bancas/VC (critérios configuráveis, resultado confidencial), Experiências Neo, Comunidade com privacidade, Perfil, Conquistas | ✅ |
-| 7 | Chat realtime, comunicados, documentos, agenda, notificações | ⏳ |
+| 7 | Chat em tempo real, comunicados com confirmação de leitura, documentos com assinatura, agenda, notificações | ✅ |
 | 8 | Admissões, dashboards de gestão, Perfil 360º, secretaria, solicitações | ⏳ |

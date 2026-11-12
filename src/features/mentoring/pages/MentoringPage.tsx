@@ -1,4 +1,5 @@
-import { MessagesSquare, Plus, Sparkles } from 'lucide-react'
+import { StartChatButton } from '@/components/shared/StartChatButton'
+import { Plus, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -53,7 +54,7 @@ function StudentView({ userId }: { userId: string }) {
               </div>
               <div className="flex gap-2 sm:flex-col">
                 <Button size="sm" onClick={() => setRequesting(m.id)}><Sparkles /> Solicitar</Button>
-                <Button size="sm" variant="outline" asChild><Link to="/chat"><MessagesSquare /> Conversar</Link></Button>
+                <StartChatButton size="sm" variant="outline" userId={m.id} />
               </div>
             </Card>
           ))}

@@ -1,4 +1,5 @@
-import { ArrowLeft, Briefcase, Building2, CalendarPlus, MessagesSquare } from 'lucide-react'
+import { StartChatButton } from '@/components/shared/StartChatButton'
+import { ArrowLeft, Briefcase, Building2, CalendarPlus } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -45,7 +46,7 @@ export default function MenteePage() {
         </div>
         <div className="flex gap-2">
           <Button onClick={() => setScheduling(true)}><CalendarPlus /> Agendar mentoria</Button>
-          <Button variant="outline" asChild><Link to="/chat"><MessagesSquare /> Conversar</Link></Button>
+          <StartChatButton variant="outline" userId={id} />
         </div>
       </header>
       <div className="grid gap-6 lg:grid-cols-3 [&>*]:min-w-0">

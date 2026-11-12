@@ -1,3 +1,4 @@
+import { StartChatButton } from '@/components/shared/StartChatButton'
 import { ArrowLeft, Building2, ExternalLink, Pencil } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -72,6 +73,7 @@ export default function ProfessionalProfilePage() {
           <Card><CardContent className="space-y-3 pt-5 text-sm">
             {(p.pro?.position || p.pro?.company) && <p className="flex items-center gap-2"><Building2 className="h-4 w-4 text-muted-foreground" />{[p.pro?.position, p.pro?.company].filter(Boolean).join(' · ')}</p>}
             {p.pro?.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-primary hover:underline"><ExternalLink className="h-4 w-4" />{l.label}</a>)}
+            {user?.user_id !== p.id && <StartChatButton size="sm" variant="outline" userId={p.id} label="Enviar mensagem" />}
             <p className="text-xs text-muted-foreground">Contato direto pelo Chat da plataforma — e-mail e telefone não são exibidos.</p>
           </CardContent></Card>
           <SectionCard title="Próximas aulas">
