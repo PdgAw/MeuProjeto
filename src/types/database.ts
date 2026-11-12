@@ -4140,6 +4140,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_session_files: {
+        Args: { p_files: Json; p_session: string }
+        Returns: undefined
+      }
       announcement_stats: {
         Args: { p_announcement: string }
         Returns: {
@@ -4156,6 +4160,10 @@ export type Database = {
           p_type: Database["public"]["Enums"]["audience_type"]
           p_user?: string
         }
+        Returns: boolean
+      }
+      can_access_session_files: {
+        Args: { p_session: string; p_user?: string }
         Returns: boolean
       }
       can_edit_calendar_event: {
@@ -4406,6 +4414,29 @@ export type Database = {
       mark_conversation_read: {
         Args: { p_conversation: string }
         Returns: undefined
+      }
+      mentor_mentees: {
+        Args: { p_mentor?: string }
+        Returns: {
+          avatar_url: string
+          cohort_name: string
+          flags: string[]
+          focus: string
+          full_name: string
+          last_session_at: string
+          next_session_at: string
+          next_session_id: string
+          open_goals: number
+          open_steps: number
+          overdue_steps: number
+          pending_requests: number
+          student_id: string
+          track: Database["public"]["Enums"]["neoleader_track"]
+          venture_id: string
+          venture_name: string
+          venture_stage: Database["public"]["Enums"]["venture_stage"]
+          venture_updated_at: string
+        }[]
       }
       mentors_student: {
         Args: { p_student: string; p_user?: string }

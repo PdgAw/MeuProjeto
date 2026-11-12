@@ -1,6 +1,6 @@
 import { supabase } from './supabase'
 
-export type Bucket = 'avatars' | 'covers' | 'documents' | 'lesson-materials' | 'submissions' | 'chat' | 'ventures' | 'experiences' | 'requests'
+export type Bucket = 'avatars' | 'covers' | 'documents' | 'lesson-materials' | 'submissions' | 'chat' | 'ventures' | 'experiences' | 'requests' | 'mentoring'
 
 export interface StoredFile { path: string; name: string; mime: string | null; size: number }
 

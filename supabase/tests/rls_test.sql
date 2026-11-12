@@ -330,4 +330,29 @@ end $$;
 select pg_temp.check(true, 'neoleader cannot read class results');
 reset role;
 
+-- ------------------------------------------------------- Mentor insights ----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000e');
+select pg_temp.check((select count(*) from public.mentor_mentees()) = 1, 'mentor sees own mentee card');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+do $$ begin
+  begin
+    perform * from public.mentor_mentees('00000000-0000-0000-0000-00000000000e');
+    raise exception 'FAIL: neoleader read mentor cards';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'neoleader cannot read another mentor dashboard');
+select public.add_session_files('30000000-0000-0000-0000-000000000001', '[{"path":"x","name":"x.pdf"}]');
+select pg_temp.check((select jsonb_array_length(files) from public.mentoring_sessions where id = '30000000-0000-0000-0000-000000000001') = 1, 'neoleader attaches file to own session');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
+do $$ begin
+  begin
+    perform public.add_session_files('30000000-0000-0000-0000-000000000001', '[]');
+    raise exception 'FAIL: peer attached file';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'peer cannot attach files to others sessions');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;
