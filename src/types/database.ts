@@ -4352,6 +4352,22 @@ export type Database = {
         Returns: undefined
       }
       current_user_context: { Args: never; Returns: Json }
+      experience_self_check_in: {
+        Args: { p_experience: string }
+        Returns: {
+          checked_in_at: string | null
+          experience_id: string
+          registered_at: string
+          status: Database["public"]["Enums"]["registration_status"]
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "experience_registrations"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       get_or_create_direct_conversation: {
         Args: { p_other: string }
         Returns: string
@@ -4563,6 +4579,20 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      student_achievements: {
+        Args: { p_student?: string }
+        Returns: {
+          category: string
+          current_value: number
+          description: string
+          icon: string
+          key: string
+          target_value: number
+          title: string
+          unlocked: boolean
+          unlocked_at: string
+        }[]
       }
       student_journey: {
         Args: { p_student?: string }

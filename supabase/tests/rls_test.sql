@@ -355,4 +355,28 @@ end $$;
 select pg_temp.check(true, 'peer cannot attach files to others sessions');
 reset role;
 
+-- ----------------------------------------------------------- Ecosystem -----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000e');
+select pg_temp.check((select count(*) from public.ventures where id = '40000000-0000-0000-0000-000000000001') = 1, 'panel evaluator sees pitched venture');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+select pg_temp.check((select count(*) from public.student_achievements()) = 15, 'achievements computed (15)');
+select pg_temp.check((select unlocked from public.student_achievements() where key = 'pitch_submitted'), 'pitch achievement unlocked');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
+do $$ begin
+  begin
+    perform * from public.student_achievements('00000000-0000-0000-0000-000000000001');
+    raise exception 'FAIL: peer read achievements';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'peer cannot read achievements of others');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000a');
+insert into public.user_permissions (user_id, permission_key, effect) values ('00000000-0000-0000-0000-000000000003', 'community.view', 'revoke');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
+select pg_temp.check((select count(*) from public.community_directory()) = 0, 'revoked community.view hides directory');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

@@ -7,4 +7,5 @@ delete from auth.users where email like '%@demo.neolevel.local';          -- cas
 delete from public.experiences where cohort_id in (select id from public.cohorts where code = 'DEMO');
 delete from public.cohorts where code = 'DEMO';                            -- cascades lessons, journey, targets
 delete from public.subjects where code like 'DEMO-%';                      -- cascades assignments, materials
+delete from public.panel_rounds where id = 'db000000-0000-4000-8000-000000000001';  -- demo panel (pitches went with the ventures)
 select 'demo data removed' as result;
