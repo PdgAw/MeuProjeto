@@ -88,6 +88,6 @@ Contas de gestão da demo não têm senha; disciplinas da demo usam códigos `DE
 | 3 | Experiência do Neoleader (navegação por cargo, dashboard, Neo Progress, Minha Jornada, trilha) | ✅ |
 | 4 | Acadêmico (disciplinas, aulas, presença, entregas, turmas com alertas, professores) | ✅ |
 | 5 | Neomentoria (sessões, notas privadas, próximos passos, dashboard do Neomentor) e Meu Negócio (KPIs, milestones, Plano de Execução) | ✅ |
-| 6 | Bancas/VC, Experiências Neo, Comunidade | ⏳ |
+| 6 | Bancas/VC (critérios configuráveis, resultado confidencial), Experiências Neo, Comunidade com privacidade, Perfil, Conquistas | ✅ |
 | 7 | Chat realtime, comunicados, documentos, agenda, notificações | ⏳ |
 | 8 | Admissões, dashboards de gestão, Perfil 360º, secretaria, solicitações | ⏳ |

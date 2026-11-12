@@ -37,6 +37,17 @@ const SessionsAdminPage = lazy(() => import('@/features/mentoring/pages/Sessions
 const MyVenturePage = lazy(() => import('@/features/ventures/pages/MyVenturePage'))
 const VenturePage = lazy(() => import('@/features/ventures/pages/VenturePage'))
 const VenturesAdminPage = lazy(() => import('@/features/ventures/pages/VenturesAdminPage'))
+const PanelsPage = lazy(() => import('@/features/panels/pages/PanelsPage'))
+const PitchFormPage = lazy(() => import('@/features/panels/pages/PitchFormPage'))
+const EvaluationsPage = lazy(() => import('@/features/panels/pages/EvaluationsPage'))
+const EvaluatePage = lazy(() => import('@/features/panels/pages/EvaluatePage'))
+const RoundsAdminPage = lazy(() => import('@/features/panels/pages/RoundsAdminPage'))
+const RoundAdminPage = lazy(() => import('@/features/panels/pages/RoundAdminPage'))
+const ExperiencesPage = lazy(() => import('@/features/experiences/pages/ExperiencesPage'))
+const ExperiencePage = lazy(() => import('@/features/experiences/pages/ExperiencePage'))
+const CommunityPage = lazy(() => import('@/features/community/pages/CommunityPage'))
+const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'))
+const AchievementsPage = lazy(() => import('@/features/achievements/AchievementsPage'))
 
 function Root() {
   return (
@@ -99,6 +110,30 @@ const BUILT: RouteObject[] = [
     element: <RequirePermission permission="ventures.view" />,
     children: [{ path: '/gestao/projetos', element: <VenturesAdminPage /> }],
   },
+  // Ecosystem (Phase 6)
+  { path: '/bancas', element: <PanelsPage /> },
+  { path: '/bancas/:roundId/pitch', element: <PitchFormPage /> },
+  { path: '/avaliacoes', element: <EvaluationsPage /> },
+  { path: '/avaliacoes/:id', element: <EvaluatePage /> },
+  {
+    element: <RequirePermission permission={['panels.manage', 'panels.results', 'panels.evaluate']} />,
+    children: [
+      { path: '/gestao/bancas', element: <RoundsAdminPage /> },
+      { path: '/gestao/bancas/:id', element: <RoundAdminPage /> },
+    ],
+  },
+  { path: '/experiencias', element: <ExperiencesPage /> },
+  { path: '/experiencias/:id', element: <ExperiencePage /> },
+  {
+    element: <RequirePermission permission="events.manage" />,
+    children: [{ path: '/gestao/experiencias', element: <ExperiencesPage /> }],
+  },
+  {
+    element: <RequirePermission permission="community.view" />,
+    children: [{ path: '/comunidade', element: <CommunityPage /> }],
+  },
+  { path: '/perfil', element: <ProfilePage /> },
+  { path: '/conquistas', element: <AchievementsPage /> },
   { path: '/gestao/neoleaders/:id', element: <ComingSoonPage title="Perfil 360º do Neoleader" phase="Fase 8" /> },
   ...(['coordination', 'direction', 'secretary'] as DashboardKey[]).map((d) => ({
     path: { coordination: '/gestao', direction: '/direcao', secretary: '/secretaria' }[d as 'coordination' | 'direction' | 'secretary'],
@@ -107,7 +142,6 @@ const BUILT: RouteObject[] = [
 ]
 const builtPaths = new Set(BUILT.flatMap((r) => [r.path, ...(r.children ?? []).map((c) => c.path)]))
 const PHASE_BY_PREFIX: [RegExp, string][] = [
-  [/bancas|experiencias|comunidade|conquistas|perfil/, 'Fase 6'],
   [/chat|comunicados|documentos|agenda|notificacoes/, 'Fase 7'],
   [/gestao|solicitacoes/, 'Fase 8'],
 ]

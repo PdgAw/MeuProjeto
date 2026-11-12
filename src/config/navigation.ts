@@ -40,6 +40,7 @@ const NEOLEADER: NavSection[] = [
     title: 'Ecossistema',
     items: [
       { key: 'experiences', label: 'Experiências Neo', path: '/experiencias', icon: Mountain },
+      { key: 'panels', label: 'Bancas', path: '/bancas', icon: Presentation },
       { key: 'community', label: 'Comunidade', path: '/comunidade', icon: Network },
       { key: 'chat', label: 'Chat', path: '/chat', icon: MessagesSquare, mobile: true },
       { key: 'announcements', label: 'Comunicados', path: '/comunicados', icon: Megaphone },
@@ -61,6 +62,7 @@ const TEACHER: NavSection[] = [
       { key: 'chat', label: 'Chat', path: '/chat', icon: MessagesSquare, mobile: true },
       { key: 'announcements', label: 'Comunicados', path: '/comunicados', icon: Megaphone },
       { key: 'documents', label: 'Documentos', path: '/documentos', icon: FileText },
+      { key: 'evaluations', label: 'Bancas', path: '/avaliacoes', icon: Award },
       { key: 'community', label: 'Comunidade', path: '/comunidade', icon: Network },
       { key: 'profile', label: 'Perfil', path: '/perfil', icon: UserCircle },
     ],
@@ -75,6 +77,7 @@ const MENTOR: NavSection[] = [
       { key: 'mentoring', label: 'Mentorias', path: '/mentorias', icon: Sparkles, mobile: true },
       { key: 'agenda', label: 'Agenda', path: '/agenda', icon: CalendarDays },
       { key: 'chat', label: 'Chat', path: '/chat', icon: MessagesSquare, mobile: true },
+      { key: 'evaluations', label: 'Bancas', path: '/avaliacoes', icon: Award },
       { key: 'community', label: 'Comunidade', path: '/comunidade', icon: Network },
       { key: 'documents', label: 'Documentos', path: '/documentos', icon: FileText },
       { key: 'profile', label: 'Perfil', path: '/perfil', icon: UserCircle },
