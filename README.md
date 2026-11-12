@@ -62,7 +62,7 @@ npm run db:types   # regenera src/types/database.ts
 | Fase | Escopo | Status |
 |---|---|---|
 | 0 | Base do projeto (stack, design system, PWA, estrutura) | ✅ |
-| 1 | Banco de dados, RBAC e RLS | ⏳ |
+| 1 | Banco de dados, RBAC e RLS ([docs](docs/database.md)) | ✅ |
 | 2 | Autenticação, convites, rotas protegidas | ⏳ |
 | 3 | Experiência do Neoleader (dashboard, Neo Progress, Minha Jornada) | ⏳ |
 | 4 | Acadêmico (disciplinas, aulas, presença, turmas, professores) | ⏳ |
