@@ -18,6 +18,7 @@ Autorização é decidida no banco — o front-end apenas reflete o que o banco 
 | `0900_progress_activity_notifications` | `notifications` (+ triggers e jobs pg_cron), `push_subscriptions`, `activity_events` (timeline 360º), `progress_dimension_settings` + RPC `neo_progress`, `journey_milestones`, RPCs `current_user_context`, `complete_first_access` |
 | `1000_storage_realtime` | 9 buckets com políticas por pasta; Realtime em mensagens e notificações |
 | `1100_reference_data` | Cargos, permissões, trilhas, competências, disciplinas iniciais, milestones, KPIs, pesos do Neo Progress |
+| `1200_harden_function_privileges` | Visitantes (`anon`) não executam funções; triggers e jobs internos fora da API |
 
 ## Modelo de permissões
 
@@ -30,6 +31,16 @@ Escopo além de permissões:
 - **Notas privadas de mentoria**: tabela separada; o Neoleader nunca as lê, mesmo via API.
 - **Comunidade**: e-mail/telefone nunca expostos; demais campos respeitam `profile_details.privacy`.
 - **Bancas**: Neoleader vê o próprio pitch, nunca notas; resultados exigem `panels.results`.
+
+## Aplicar no Supabase hospedado
+
+```bash
+SUPABASE_PROJECT_REF=aoutklwhwkomvtlinxcq SUPABASE_ACCESS_TOKEN=sbp_... supabase/scripts/apply_remote.sh
+```
+
+O script usa a Management API (HTTPS), aplica só migrations pendentes — cada uma em uma transação —
+e registra em `supabase_migrations.schema_migrations` (compatível com a CLI).
+Tipos TypeScript: `src/types/database.ts`, gerados do banco real.
 
 ## Testes
 
