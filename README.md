@@ -48,6 +48,15 @@ npm install
 npm run dev
 ```
 
+## Autenticação
+
+- Acesso privado: cadastro público desligado; contas só via Edge Function `invite-user`
+  (exige `users.create`; cargos de gestão exigem `permissions.manage`).
+- Convite → e-mail → `/primeiro-acesso` (define senha, ativa a conta) → dashboard do cargo.
+- Recuperação: `/esqueci-senha` → e-mail → `/redefinir-senha`.
+- `current_user_context()` carrega perfil, cargos, permissões, turma e dashboard em uma chamada.
+- `usePermission()` / `<Can>` refletem o RBAC na UI; o banco aplica as mesmas regras via RLS.
+
 ## Banco de dados (Supabase)
 
 ```bash
@@ -63,7 +72,7 @@ npm run db:types   # regenera src/types/database.ts
 |---|---|---|
 | 0 | Base do projeto (stack, design system, PWA, estrutura) | ✅ |
 | 1 | Banco de dados, RBAC e RLS ([docs](docs/database.md)) | ✅ |
-| 2 | Autenticação, convites, rotas protegidas | ⏳ |
+| 2 | Autenticação, convites (Edge Function), rotas protegidas | ✅ |
 | 3 | Experiência do Neoleader (dashboard, Neo Progress, Minha Jornada) | ⏳ |
 | 4 | Acadêmico (disciplinas, aulas, presença, turmas, professores) | ⏳ |
 | 5 | Neomentoria, Meu Negócio, Plano de Execução | ⏳ |
