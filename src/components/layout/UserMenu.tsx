@@ -9,8 +9,8 @@ export function UserMenu() {
   if (!user) return null
   const roleName = user.roles[0]?.name ?? ''
   return (
-    <div className="flex items-center gap-3">
-      <div className="hidden text-right sm:block">
+    <div className="flex items-center gap-2 sm:gap-3">
+      <div className="hidden text-right md:block">
         <p className="text-sm font-medium leading-tight">{user.preferred_name || user.full_name}</p>
         <p className="text-xs text-muted-foreground">{roleName}{user.cohort ? ` · ${user.cohort.name}` : ''}</p>
       </div>
@@ -18,7 +18,7 @@ export function UserMenu() {
         {user.avatar_url && <AvatarImage src={user.avatar_url} alt="" />}
         <AvatarFallback>{initials(user.full_name)}</AvatarFallback>
       </Avatar>
-      <Button variant="ghost" size="icon" onClick={() => void signOut()} aria-label="Sair">
+      <Button variant="ghost" size="icon" onClick={() => void signOut()} aria-label="Sair" title="Sair">
         <LogOut />
       </Button>
     </div>

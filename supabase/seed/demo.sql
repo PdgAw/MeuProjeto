@@ -15,9 +15,14 @@
 -- =============================================================================
 
 -- ---------------------------------------------------------------- helpers ----
+-- Local (São Paulo) calendar date: the server clock is UTC, which is already
+-- "tomorrow" in the evening in Florianópolis.
+create or replace function pg_temp.local_today() returns date language sql stable as $$
+  select (now() at time zone 'America/Sao_Paulo')::date
+$$;
 create or replace function pg_temp.at_local(p_days int, p_time time)
-returns timestamptz language sql immutable as $$
-  select ((current_date + p_days) + p_time) at time zone 'America/Sao_Paulo'
+returns timestamptz language sql stable as $$
+  select ((pg_temp.local_today() + p_days) + p_time) at time zone 'America/Sao_Paulo'
 $$;
 
 create or replace function pg_temp.demo_user(
@@ -72,7 +77,7 @@ insert into public.professional_profiles (user_id, headline, company, position, 
 
 -- ------------------------------------------------------------------ cohort ---
 insert into public.cohorts (id, name, code, year, starts_on, ends_on, capacity, status, coordinator_id, description)
-values ('d1000000-0000-4000-8000-000000000001', 'NeoLevel Demo 2026.1', 'DEMO', 2026, current_date - 90, current_date + 640, 20,
+values ('d1000000-0000-4000-8000-000000000001', 'NeoLevel Demo 2026.1', 'DEMO', 2026, pg_temp.local_today() - 90, pg_temp.local_today() + 640, 20,
         'active', 'd0000000-0000-4000-8000-00000000000c', 'Turma de demonstração (removível).');
 
 insert into public.enrollments (user_id, cohort_id, enrolled_at)
@@ -111,10 +116,10 @@ from public.track_checkpoints tc where tc.track = 'founder';
 
 -- ---------------------------------------------------------------- academic ---
 insert into public.subjects (id, code, name, description, status, starts_on, ends_on, workload_hours, period_label, dimensions, sort_order, created_by) values
-  ('d2000000-0000-4000-8000-000000000001', 'DEMO-LID', 'Liderança e Soft Skills', 'Autoconhecimento, comunicação e liderança de equipes.', 'completed', current_date - 90, current_date - 31, 24, '2026 · Ciclo 1', '{learning}', 1, 'd0000000-0000-4000-8000-00000000000c'),
-  ('d2000000-0000-4000-8000-000000000002', 'DEMO-EST', 'Estratégia Empresarial', 'Análise competitiva, modelo de negócio e planejamento estratégico.', 'active', current_date - 30, current_date + 30, 32, '2026 · Ciclo 2', '{learning,venture}', 2, 'd0000000-0000-4000-8000-00000000000c'),
-  ('d2000000-0000-4000-8000-000000000003', 'DEMO-FIN', 'Finanças e Investimentos', 'Finanças empresariais, valuation e captação.', 'active', current_date - 14, current_date + 60, 32, '2026 · Ciclo 2', '{learning,venture}', 3, 'd0000000-0000-4000-8000-00000000000c'),
-  ('d2000000-0000-4000-8000-000000000004', 'DEMO-PRJ', 'Desenvolvimento de Projeto Próprio', 'Construção do negócio ao longo da jornada.', 'active', current_date - 90, current_date + 600, 120, 'Jornada completa', '{venture,execution}', 4, 'd0000000-0000-4000-8000-00000000000c');
+  ('d2000000-0000-4000-8000-000000000001', 'DEMO-LID', 'Liderança e Soft Skills', 'Autoconhecimento, comunicação e liderança de equipes.', 'completed', pg_temp.local_today() - 90, pg_temp.local_today() - 31, 24, '2026 · Ciclo 1', '{learning}', 1, 'd0000000-0000-4000-8000-00000000000c'),
+  ('d2000000-0000-4000-8000-000000000002', 'DEMO-EST', 'Estratégia Empresarial', 'Análise competitiva, modelo de negócio e planejamento estratégico.', 'active', pg_temp.local_today() - 30, pg_temp.local_today() + 30, 32, '2026 · Ciclo 2', '{learning,venture}', 2, 'd0000000-0000-4000-8000-00000000000c'),
+  ('d2000000-0000-4000-8000-000000000003', 'DEMO-FIN', 'Finanças e Investimentos', 'Finanças empresariais, valuation e captação.', 'active', pg_temp.local_today() - 14, pg_temp.local_today() + 60, 32, '2026 · Ciclo 2', '{learning,venture}', 3, 'd0000000-0000-4000-8000-00000000000c'),
+  ('d2000000-0000-4000-8000-000000000004', 'DEMO-PRJ', 'Desenvolvimento de Projeto Próprio', 'Construção do negócio ao longo da jornada.', 'active', pg_temp.local_today() - 90, pg_temp.local_today() + 600, 120, 'Jornada completa', '{venture,execution}', 4, 'd0000000-0000-4000-8000-00000000000c');
 
 insert into public.subject_cohorts (subject_id, cohort_id)
 select s, 'd1000000-0000-4000-8000-000000000001' from unnest(array[
@@ -213,14 +218,14 @@ insert into public.mentoring_private_notes (student_id, session_id, author_id, c
    'Marina evolui rápido, mas tende a postergar decisões de preço. Cobrar definição na próxima sessão.');
 
 insert into public.mentoring_action_items (session_id, student_id, title, due_date, status, sort_order, created_by) values
-  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Entrevistar 10 clientes', current_date - 2, 'done', 1, 'd0000000-0000-4000-8000-00000000000b'),
-  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Revisar pricing', current_date + 4, 'open', 2, 'd0000000-0000-4000-8000-00000000000b'),
-  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Atualizar projeção financeira', current_date + 4, 'open', 3, 'd0000000-0000-4000-8000-00000000000b');
+  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Entrevistar 10 clientes', pg_temp.local_today() - 2, 'done', 1, 'd0000000-0000-4000-8000-00000000000b'),
+  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Revisar pricing', pg_temp.local_today() + 4, 'open', 2, 'd0000000-0000-4000-8000-00000000000b'),
+  ('d5000000-0000-4000-8000-000000000002', 'd0000000-0000-4000-8000-000000000001', 'Atualizar projeção financeira', pg_temp.local_today() + 4, 'open', 3, 'd0000000-0000-4000-8000-00000000000b');
 
 insert into public.goals (owner_id, created_by, source, title, dimension, due_date, status, progress) values
-  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-000000000001', 'self', 'Fechar 5 restaurantes pagantes', 'venture', current_date + 45, 'in_progress', 40),
-  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-00000000000b', 'mentoring', 'Definir modelo de preço', 'execution', current_date + 7, 'in_progress', 60),
-  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-000000000001', 'self', 'Lançar o MVP', 'venture', current_date - 20, 'done', 100);
+  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-000000000001', 'self', 'Fechar 5 restaurantes pagantes', 'venture', pg_temp.local_today() + 45, 'in_progress', 40),
+  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-00000000000b', 'mentoring', 'Definir modelo de preço', 'execution', pg_temp.local_today() + 7, 'in_progress', 60),
+  ('d0000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-000000000001', 'self', 'Lançar o MVP', 'venture', pg_temp.local_today() - 20, 'done', 100);
 
 -- ----------------------------------------------------------------- venture ---
 insert into public.ventures (id, owner_id, name, tagline, description, segment, business_model, stage, problem, solution, audience,
@@ -263,24 +268,24 @@ with k as (
   returning id, definition_id
 )
 insert into public.venture_kpi_values (venture_kpi_id, period_start, value)
-select k.id, (date_trunc('month', current_date) - (m * interval '1 month'))::date,
+select k.id, (date_trunc('month', pg_temp.local_today()) - (m * interval '1 month'))::date,
        case d.key when 'customers' then (array[2, 1, 0, 0])[m + 1]
                   when 'leads' then (array[41, 25, 12, 4])[m + 1]
                   else (array[2100, 800, 0, 0])[m + 1] end
 from k join public.kpi_definitions d on d.id = k.definition_id, generate_series(0, 3) m;
 
 insert into public.venture_objectives (id, venture_id, title, period_label, due_date, status) values
-  ('d7000000-0000-4000-8000-000000000001', 'd6000000-0000-4000-8000-000000000001', 'Conquistar os primeiros clientes pagantes', 'Próximos 60 dias', current_date + 60, 'in_progress');
+  ('d7000000-0000-4000-8000-000000000001', 'd6000000-0000-4000-8000-000000000001', 'Conquistar os primeiros clientes pagantes', 'Próximos 60 dias', pg_temp.local_today() + 60, 'in_progress');
 insert into public.venture_key_results (objective_id, title, unit, start_value, target_value, current_value, sort_order) values
   ('d7000000-0000-4000-8000-000000000001', 'Restaurantes pagantes', 'restaurantes', 0, 5, 2, 1),
   ('d7000000-0000-4000-8000-000000000001', 'Restaurantes em teste', 'restaurantes', 0, 10, 6, 2),
   ('d7000000-0000-4000-8000-000000000001', 'Receita mensal', 'R$', 0, 10000, 2100, 3);
 insert into public.venture_actions (venture_id, objective_id, title, owner_id, due_date, status, sort_order) values
-  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Lançar landing page', 'd0000000-0000-4000-8000-000000000001', current_date - 25, 'done', 1),
-  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Criar tabela de preços', 'd0000000-0000-4000-8000-000000000001', current_date - 5, 'done', 2),
-  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Visitar 15 restaurantes no centro', 'd0000000-0000-4000-8000-000000000001', current_date + 12, 'in_progress', 3),
-  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Contratar entregador parceiro', 'd0000000-0000-4000-8000-000000000001', current_date + 8, 'blocked', 4),
-  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Estruturar contrato de assinatura', 'd0000000-0000-4000-8000-000000000001', current_date + 20, 'not_started', 5);
+  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Lançar landing page', 'd0000000-0000-4000-8000-000000000001', pg_temp.local_today() - 25, 'done', 1),
+  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Criar tabela de preços', 'd0000000-0000-4000-8000-000000000001', pg_temp.local_today() - 5, 'done', 2),
+  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Visitar 15 restaurantes no centro', 'd0000000-0000-4000-8000-000000000001', pg_temp.local_today() + 12, 'in_progress', 3),
+  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Contratar entregador parceiro', 'd0000000-0000-4000-8000-000000000001', pg_temp.local_today() + 8, 'blocked', 4),
+  ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'Estruturar contrato de assinatura', 'd0000000-0000-4000-8000-000000000001', pg_temp.local_today() + 20, 'not_started', 5);
 insert into public.venture_comments (venture_id, objective_id, author_id, body) values
   ('d6000000-0000-4000-8000-000000000001', 'd7000000-0000-4000-8000-000000000001', 'd0000000-0000-4000-8000-00000000000b',
    'Boa evolução! Priorize a logística antes de escalar visitas — é o que vai segurar a retenção.');
@@ -335,21 +340,21 @@ insert into public.documents (title, description, category, status, owner_user_i
 
 -- ------------------------------------------------------------------ journey --
 insert into public.journey_milestones (cohort_id, kind, title, description, planned_start, planned_end, subject_id, experience_id, requirements, sort_order) values
-  ('d1000000-0000-4000-8000-000000000001', 'event', 'Imersão de boas-vindas', 'Integração da turma e apresentação da jornada.', current_date - 90, current_date - 88, null, null, '[]', 1),
-  ('d1000000-0000-4000-8000-000000000001', 'milestone', 'Diagnóstico do Neoleader', 'Mapeamento de perfil, objetivos e ponto de partida do negócio.', current_date - 80, current_date - 75, null, null, '[]', 2),
-  ('d1000000-0000-4000-8000-000000000001', 'subject', 'Ciclo 1 · Liderança e Soft Skills', null, current_date - 90, current_date - 31, 'd2000000-0000-4000-8000-000000000001', null, '[]', 3),
-  ('d1000000-0000-4000-8000-000000000001', 'subject', 'Ciclo 2 · Estratégia Empresarial', null, current_date - 30, current_date + 30, 'd2000000-0000-4000-8000-000000000002', null, '[]', 4),
-  ('d1000000-0000-4000-8000-000000000001', 'company_visit', 'Primeira Visita Empresarial', null, current_date + 6, current_date + 6, null, 'd8000000-0000-4000-8000-000000000002', '[]', 5),
-  ('d1000000-0000-4000-8000-000000000001', 'panel', 'Banca de Validação', 'Apresentação do negócio validado para a banca NeoLevel.', current_date + 45, current_date + 45, null, null,
+  ('d1000000-0000-4000-8000-000000000001', 'event', 'Imersão de boas-vindas', 'Integração da turma e apresentação da jornada.', pg_temp.local_today() - 90, pg_temp.local_today() - 88, null, null, '[]', 1),
+  ('d1000000-0000-4000-8000-000000000001', 'milestone', 'Diagnóstico do Neoleader', 'Mapeamento de perfil, objetivos e ponto de partida do negócio.', pg_temp.local_today() - 80, pg_temp.local_today() - 75, null, null, '[]', 2),
+  ('d1000000-0000-4000-8000-000000000001', 'subject', 'Ciclo 1 · Liderança e Soft Skills', null, pg_temp.local_today() - 90, pg_temp.local_today() - 31, 'd2000000-0000-4000-8000-000000000001', null, '[]', 3),
+  ('d1000000-0000-4000-8000-000000000001', 'subject', 'Ciclo 2 · Estratégia Empresarial', null, pg_temp.local_today() - 30, pg_temp.local_today() + 30, 'd2000000-0000-4000-8000-000000000002', null, '[]', 4),
+  ('d1000000-0000-4000-8000-000000000001', 'company_visit', 'Primeira Visita Empresarial', null, pg_temp.local_today() + 6, pg_temp.local_today() + 6, null, 'd8000000-0000-4000-8000-000000000002', '[]', 5),
+  ('d1000000-0000-4000-8000-000000000001', 'panel', 'Banca de Validação', 'Apresentação do negócio validado para a banca NeoLevel.', pg_temp.local_today() + 45, pg_temp.local_today() + 45, null, null,
    '[{"label": "Validação concluída na trilha", "type": "checkpoint", "key": "validation"},
      {"label": "Negócio no estágio MVP", "type": "venture_stage", "stage": "mvp"},
      {"label": "3 Neomentorias concluídas", "type": "mentorings", "count": 3},
      {"label": "Frequência mínima de 75%", "type": "attendance", "min": 75}]', 6),
-  ('d1000000-0000-4000-8000-000000000001', 'experience', 'Missão Empresarial', 'Imersão de uma semana em um polo de inovação.', current_date + 200, current_date + 206, null, null, '[]', 7),
-  ('d1000000-0000-4000-8000-000000000001', 'panel', 'Banca Final de Venture Capital', 'Pitch para investidores convidados.', current_date + 560, current_date + 560, null, null,
+  ('d1000000-0000-4000-8000-000000000001', 'experience', 'Missão Empresarial', 'Imersão de uma semana em um polo de inovação.', pg_temp.local_today() + 200, pg_temp.local_today() + 206, null, null, '[]', 7),
+  ('d1000000-0000-4000-8000-000000000001', 'panel', 'Banca Final de Venture Capital', 'Pitch para investidores convidados.', pg_temp.local_today() + 560, pg_temp.local_today() + 560, null, null,
    '[{"label": "Negócio em Tração", "type": "venture_stage", "stage": "traction"},
      {"label": "R$ 10 mil de receita", "type": "milestone", "title": "R$ 10 mil de receita"}]', 8),
-  ('d1000000-0000-4000-8000-000000000001', 'certification', 'Certificação NeoLevel', 'Conclusão da jornada de dois anos.', current_date + 640, current_date + 640, null, null,
+  ('d1000000-0000-4000-8000-000000000001', 'certification', 'Certificação NeoLevel', 'Conclusão da jornada de dois anos.', pg_temp.local_today() + 640, pg_temp.local_today() + 640, null, null,
    '[{"label": "Frequência mínima de 75%", "type": "attendance", "min": 75}]', 9);
 insert into public.journey_completions (milestone_id, user_id, completed_at)
 select jm.id, e.user_id, now() - interval '76 days'
