@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * NeoLevel design tokens.
+ * Ink navy for authority, electric "neo" blue for action, lime for progress/level-up.
+ */
+@layer base {
+  :root {
+    --background: 225 33% 98%;
+    --foreground: 226 45% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 45% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 45% 9%;
+    --primary: 232 89% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 226 30% 94%;
+    --secondary-foreground: 226 45% 12%;
+    --muted: 226 25% 95%;
+    --muted-foreground: 226 12% 42%;
+    --accent: 80 85% 65%;
+    --accent-foreground: 226 45% 9%;
+    --destructive: 0 74% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 62% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 36 95% 48%;
+    --warning-foreground: 226 45% 9%;
+    --border: 226 22% 89%;
+    --input: 226 22% 86%;
+    --ring: 232 89% 58%;
+    --radius: 0.75rem;
+
+    --sidebar: 228 48% 8%;
+    --sidebar-foreground: 226 30% 92%;
+    --sidebar-muted: 226 16% 62%;
+    --sidebar-accent: 228 36% 15%;
+    --sidebar-border: 228 30% 16%;
+
+    --dim-learning: 232 89% 58%;
+    --dim-execution: 14 88% 56%;
+    --dim-mentoring: 268 70% 58%;
+    --dim-participation: 190 80% 42%;
+    --dim-venture: 80 70% 42%;
+    --dim-experiences: 330 75% 55%;
+    --dim-goals: 42 92% 50%;
+  }
+
+  .dark {
+    --background: 228 48% 6%;
+    --foreground: 226 30% 94%;
+    --card: 228 40% 9%;
+    --card-foreground: 226 30% 94%;
+    --popover: 228 40% 9%;
+    --popover-foreground: 226 30% 94%;
+    --primary: 232 95% 68%;
+    --primary-foreground: 228 48% 6%;
+    --secondary: 228 30% 15%;
+    --secondary-foreground: 226 30% 94%;
+    --muted: 228 30% 13%;
+    --muted-foreground: 226 15% 64%;
+    --accent: 80 85% 65%;
+    --accent-foreground: 228 48% 6%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 55% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 228 48% 6%;
+    --border: 228 28% 17%;
+    --input: 228 28% 20%;
+    --ring: 232 95% 68%;
+
+    --sidebar: 228 50% 5%;
+    --sidebar-accent: 228 36% 12%;
+    --sidebar-border: 228 30% 13%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-dvh;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
