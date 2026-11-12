@@ -12,12 +12,22 @@ alter default privileges in schema public grant all on sequences to anon, authen
 
 create schema auth;
 grant usage on schema auth to anon, authenticated, service_role;
+create schema if not exists extensions;
+create extension if not exists pgcrypto with schema extensions;
 create table auth.users (
-  id uuid primary key default gen_random_uuid(),
-  email text unique,
+  instance_id uuid, id uuid primary key default gen_random_uuid(), aud text, role text,
+  email text unique, encrypted_password text, email_confirmed_at timestamptz, invited_at timestamptz,
+  confirmation_token text, recovery_token text, email_change_token_new text, email_change text,
+  email_change_token_current text, phone_change text, phone_change_token text, reauthentication_token text,
   raw_user_meta_data jsonb default '{}'::jsonb,
   raw_app_meta_data jsonb default '{}'::jsonb,
-  created_at timestamptz default now()
+  last_sign_in_at timestamptz,
+  created_at timestamptz default now(), updated_at timestamptz default now()
+);
+create table auth.identities (
+  id uuid primary key default gen_random_uuid(), provider_id text not null, user_id uuid references auth.users on delete cascade,
+  identity_data jsonb not null, provider text not null, last_sign_in_at timestamptz,
+  created_at timestamptz default now(), updated_at timestamptz default now(), unique (provider_id, provider)
 );
 create function auth.uid() returns uuid language sql stable as $$
   select nullif(current_setting('request.jwt.claims', true)::jsonb ->> 'sub', '')::uuid

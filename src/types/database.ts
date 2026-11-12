@@ -4158,6 +4158,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      can_edit_calendar_event: {
+        Args: { p_event: string; p_user?: string }
+        Returns: boolean
+      }
       can_edit_venture: {
         Args: { p_user?: string; p_venture: string }
         Returns: boolean
@@ -4168,6 +4172,10 @@ export type Database = {
       }
       can_read_object: {
         Args: { p_bucket: string; p_name: string }
+        Returns: boolean
+      }
+      can_see_calendar_event: {
+        Args: { p_event: string; p_user?: string }
         Returns: boolean
       }
       can_see_experience: {
@@ -4352,6 +4360,10 @@ export type Database = {
         Args: { p_user?: string; p_venture: string }
         Returns: boolean
       }
+      journey_requirement_met: {
+        Args: { p_req: Json; p_student: string }
+        Returns: boolean
+      }
       log_activity: {
         Args: {
           p_dimension: Database["public"]["Enums"]["progress_dimension"]
@@ -4494,6 +4506,21 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      student_journey: {
+        Args: { p_student?: string }
+        Returns: {
+          completed_at: string
+          description: string
+          ends_on: string
+          item_id: string
+          kind: Database["public"]["Enums"]["journey_item_kind"]
+          requirements: Json
+          source: string
+          starts_on: string
+          status: string
+          title: string
+        }[]
       }
       studies_subject: {
         Args: { p_subject: string; p_user?: string }

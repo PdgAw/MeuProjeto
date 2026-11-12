@@ -283,4 +283,27 @@ select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
 select pg_temp.check((select count(*) from storage.objects where bucket_id = 'documents') = 0, 'peer cannot read contract file');
 reset role;
 
+-- ------------------------------------------------------ Agenda & journey ----
+insert into public.calendar_events (id, title, event_type, starts_at, created_by)
+values ('90000000-0000-0000-0000-000000000001', 'Reunião de turma', 'meeting', now() + interval '1 day', '00000000-0000-0000-0000-00000000000c');
+insert into public.calendar_event_targets (event_id, target_type, target_id)
+values ('90000000-0000-0000-0000-000000000001', 'cohort', '10000000-0000-0000-0000-00000000000a');
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+select pg_temp.check((select count(*) from public.my_agenda(now() - interval '1 day', now() + interval '8 days')
+                      where source = 'calendar_event') = 1, 'agenda shows targeted event (no policy recursion)');
+select pg_temp.check((select count(*) from public.my_agenda(now() - interval '1 day', now() + interval '8 days')
+                      where item_type = 'class') = 1, 'agenda shows cohort lesson');
+select pg_temp.check((select count(*) from public.student_journey()) >= 1, 'journey timeline builds');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
+select pg_temp.check((select count(*) from public.calendar_events) = 0, 'other cohort does not see event');
+do $$ begin
+  begin
+    perform * from public.student_journey('00000000-0000-0000-0000-000000000001');
+    raise exception 'FAIL: peer read journey';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'peer cannot read journey of others');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;
