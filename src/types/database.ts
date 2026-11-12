@@ -4361,6 +4361,19 @@ export type Database = {
         Args: { p_candidate: string; p_cohort?: string; p_user: string }
         Returns: undefined
       }
+      create_agreement_with_installments: {
+        Args: {
+          p_cohort: string
+          p_discount_kind?: Database["public"]["Enums"]["adjustment_kind"]
+          p_discount_percent?: number
+          p_first_due: string
+          p_installments: number
+          p_reason?: string
+          p_student: string
+          p_total: number
+        }
+        Returns: string
+      }
       create_group_conversation: {
         Args: {
           p_cohort?: string
@@ -4379,6 +4392,16 @@ export type Database = {
           signed_at: string
           user_id: string
         }[]
+      }
+      executive_kpis: {
+        Args: {
+          p_cohort?: string
+          p_from: string
+          p_status?: Database["public"]["Enums"]["enrollment_status"]
+          p_to: string
+          p_track?: Database["public"]["Enums"]["neoleader_track"]
+        }
+        Returns: Json
       }
       experience_self_check_in: {
         Args: { p_experience: string }
@@ -4454,6 +4477,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      management_overview: { Args: { p_cohort?: string }; Returns: Json }
       mark_all_notifications_read: { Args: never; Returns: undefined }
       mark_conversation_read: {
         Args: { p_conversation: string }

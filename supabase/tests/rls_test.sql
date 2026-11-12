@@ -434,4 +434,63 @@ insert into public.announcement_targets (announcement_id, target_type, target_id
 select pg_temp.check((select sent from public.announcement_stats('50000000-0000-0000-0000-0000000000a1')) = 2, 'teacher announcement reaches 2 students (author not counted)');
 reset role;
 
+-- ------------------------------------------------------------ Management -----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+select pg_temp.check((public.management_overview() ->> 'neoleaders_active')::int = 3, 'coordination overview counts active Neoleaders');
+select pg_temp.check((public.executive_kpis(now() - interval '90 days', now()) ->> 'neoleaders')::int = 3, 'executive KPIs for reports.view');
+do $$ begin
+  begin
+    perform public.create_agreement_with_installments('00000000-0000-0000-0000-000000000001', null, 1200, 3, current_date);
+    raise exception 'FAIL: coordinator created agreement';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'finance requires finance.manage');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000a');
+select public.create_agreement_with_installments('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-00000000000a', 1000, 3, current_date, 10, 'scholarship', 'Bolsa mérito') as ag \gset
+select pg_temp.check((select sum(amount) from public.tuition_installments where agreement_id = :'ag') = 900, 'installments sum to the net value (10% scholarship)');
+select pg_temp.check((select count(*) from public.tuition_installments where agreement_id = :'ag') = 3, '3 installments generated');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+select pg_temp.check((select count(*) from public.tuition_installments) = 3, 'student sees own installments');
+do $$ begin
+  begin
+    perform public.management_overview();
+    raise exception 'FAIL: student read management overview';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'student cannot read management overview');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
+select pg_temp.check((select count(*) from public.tuition_installments) = 0, 'peer cannot see others finances');
+reset role;
+
+-- ------------------------------------------------------- Admissions flow -----
+insert into public.candidates (id, full_name, email, phone, city, profile_type, goals, company, status, target_cohort_id)
+values ('c0000000-0000-0000-0000-000000000001', 'Diego Candidato', 'diego@neo.test', '48999990000', 'Itajaí', 'successor', 'Assumir a empresa', 'Pescados Itajaí', 'committee', '10000000-0000-0000-0000-00000000000a');
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+select pg_temp.check((select count(*) from public.candidates) = 0, 'neoleader cannot see admissions');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+insert into public.committee_reviews (candidate_id, reviewer_id, score, decision) values ('c0000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-00000000000c', 8.5, 'approve');
+update public.candidates set status = 'approved' where id = 'c0000000-0000-0000-0000-000000000001';
+reset role;
+insert into auth.users (id, email, raw_user_meta_data, raw_app_meta_data) values ('00000000-0000-0000-0000-0000000000d1', 'diego@neo.test', '{"full_name":"diego"}', '{}');
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+select public.convert_candidate_to_neoleader('c0000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-0000000000d1');
+select pg_temp.check((select status = 'enrolled' and converted_user_id is not null from public.candidates where id = 'c0000000-0000-0000-0000-000000000001'), 'candidate marked enrolled');
+select pg_temp.check((select full_name from public.profiles where id = '00000000-0000-0000-0000-0000000000d1') = 'Diego Candidato', 'profile filled from the application (no retyping)');
+select pg_temp.check((select track from public.neoleader_profiles where user_id = '00000000-0000-0000-0000-0000000000d1') = 'successor', 'track copied');
+select pg_temp.check((select company_name from public.family_businesses where owner_id = '00000000-0000-0000-0000-0000000000d1') = 'Pescados Itajaí', 'family business created');
+select pg_temp.check((select count(*) from public.enrollments where user_id = '00000000-0000-0000-0000-0000000000d1') = 1, 'enrolled in target cohort');
+select pg_temp.check(public.has_role('neoleader', '00000000-0000-0000-0000-0000000000d1'), 'neoleader role granted');
+do $$ begin
+  begin
+    perform public.convert_candidate_to_neoleader('c0000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-0000000000d1');
+    raise exception 'FAIL: converted twice';
+  exception when others then if sqlerrm like 'FAIL%' then raise; end if; end;
+end $$;
+select pg_temp.check(true, 'conversion cannot run twice (no duplicates)');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

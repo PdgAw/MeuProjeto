@@ -3,6 +3,7 @@
 delete from public.documents
  where created_by in (select id from auth.users where email like '%@demo.neolevel.local')
     or owner_user_id in (select id from auth.users where email like '%@demo.neolevel.local');
+delete from public.candidates where email like '%@demo.neolevel.local';          -- demo admissions
 delete from auth.users where email like '%@demo.neolevel.local';          -- cascades profiles & personal data
 delete from public.experiences where cohort_id in (select id from public.cohorts where code = 'DEMO');
 delete from public.cohorts where code = 'DEMO';                            -- cascades lessons, journey, targets
