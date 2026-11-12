@@ -27,6 +27,16 @@ const CohortsPage = lazy(() => import('@/features/cohorts/pages/CohortsPage'))
 const CohortDetailPage = lazy(() => import('@/features/cohorts/pages/CohortDetailPage'))
 const TeachersPage = lazy(() => import('@/features/teachers/pages/TeachersPage'))
 const ProfessionalProfilePage = lazy(() => import('@/features/teachers/pages/ProfessionalProfilePage'))
+const MentoringPage = lazy(() => import('@/features/mentoring/pages/MentoringPage'))
+const SessionPage = lazy(() => import('@/features/mentoring/pages/SessionPage'))
+const MentorDashboardPage = lazy(() => import('@/features/mentoring/pages/MentorDashboardPage'))
+const MenteesPage = lazy(() => import('@/features/mentoring/pages/MenteesPage'))
+const MenteePage = lazy(() => import('@/features/mentoring/pages/MenteePage'))
+const MentorsAdminPage = lazy(() => import('@/features/mentoring/pages/MentorsAdminPage'))
+const SessionsAdminPage = lazy(() => import('@/features/mentoring/pages/SessionsAdminPage'))
+const MyVenturePage = lazy(() => import('@/features/ventures/pages/MyVenturePage'))
+const VenturePage = lazy(() => import('@/features/ventures/pages/VenturePage'))
+const VenturesAdminPage = lazy(() => import('@/features/ventures/pages/VenturesAdminPage'))
 
 function Root() {
   return (
@@ -70,15 +80,33 @@ const BUILT: RouteObject[] = [
     element: <RequirePermission permission="users.view" />,
     children: [{ path: '/gestao/professores', element: <TeachersPage /> }],
   },
+  // Neomentoria & Meu Negócio (Phase 5)
+  { path: '/mentorias', element: <MentoringPage /> },
+  { path: '/mentorias/:id', element: <SessionPage /> },
+  { path: '/neomentor', element: <MentorDashboardPage /> },
+  { path: '/neomentor/neoleaders', element: <MenteesPage /> },
+  { path: '/neomentor/neoleaders/:id', element: <MenteePage /> },
+  { path: '/meu-negocio', element: <MyVenturePage /> },
+  { path: '/negocios/:id', element: <VenturePage /> },
+  {
+    element: <RequirePermission permission="mentoring.view" />,
+    children: [
+      { path: '/gestao/neomentores', element: <MentorsAdminPage /> },
+      { path: '/gestao/mentorias', element: <SessionsAdminPage /> },
+    ],
+  },
+  {
+    element: <RequirePermission permission="ventures.view" />,
+    children: [{ path: '/gestao/projetos', element: <VenturesAdminPage /> }],
+  },
   { path: '/gestao/neoleaders/:id', element: <ComingSoonPage title="Perfil 360º do Neoleader" phase="Fase 8" /> },
-  ...(['coordination', 'direction', 'mentor', 'secretary'] as DashboardKey[]).map((d) => ({
-    path: { coordination: '/gestao', direction: '/direcao', mentor: '/neomentor', secretary: '/secretaria' }[d as Exclude<DashboardKey, 'neoleader' | 'staff' | 'teacher'>],
+  ...(['coordination', 'direction', 'secretary'] as DashboardKey[]).map((d) => ({
+    path: { coordination: '/gestao', direction: '/direcao', secretary: '/secretaria' }[d as 'coordination' | 'direction' | 'secretary'],
     element: <RoleHomePage dashboard={d} />,
   })),
 ]
 const builtPaths = new Set(BUILT.flatMap((r) => [r.path, ...(r.children ?? []).map((c) => c.path)]))
 const PHASE_BY_PREFIX: [RegExp, string][] = [
-  [/mentoria|neomentor|meu-negocio|projetos/, 'Fase 5'],
   [/bancas|experiencias|comunidade|conquistas|perfil/, 'Fase 6'],
   [/chat|comunicados|documentos|agenda|notificacoes/, 'Fase 7'],
   [/gestao|solicitacoes/, 'Fase 8'],

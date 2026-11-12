@@ -3,7 +3,7 @@ import { Label } from './label'
 
 interface FormFieldProps {
   id: string
-  label: string
+  label: ReactNode
   error?: string
   hint?: ReactNode
   action?: ReactNode
