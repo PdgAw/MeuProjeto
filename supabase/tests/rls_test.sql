@@ -379,4 +379,31 @@ select pg_temp.act_as('00000000-0000-0000-0000-000000000003');
 select pg_temp.check((select count(*) from public.community_directory()) = 0, 'revoked community.view hides directory');
 reset role;
 
+-- ----------------------------------------------------- Communication views ----
+-- (everything runs in one transaction: move the mentor's read marker back in time)
+update public.conversation_members set last_read_at = now() - interval '1 minute' where user_id = '00000000-0000-0000-0000-00000000000e';
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000e');
+select pg_temp.check((select unread from public.my_conversations() limit 1) = 1, 'mentor sees 1 unread message');
+select pg_temp.check((select title from public.my_conversations() limit 1) = 'Alice Neoleader', 'direct chat titled with the other person');
+select public.mark_conversation_read((select id from public.my_conversations() limit 1));
+select pg_temp.check((select unread from public.my_conversations() limit 1) = 0, 'marking read clears unread');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+do $$ begin
+  begin
+    perform public.create_group_conversation('Grupo', 'group', '{}');
+    raise exception 'FAIL: neoleader created group';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'neoleader cannot create groups');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+select public.create_group_conversation('Turma 2026.1', 'cohort', '{}', '10000000-0000-0000-0000-00000000000a') as gid \gset
+select pg_temp.check((select count(*) from public.conversation_members where conversation_id = :'gid') = 3, 'cohort room includes coordinator + 2 students');
+select pg_temp.check((select count(*) from public.announcement_recipients('50000000-0000-0000-0000-000000000001') where read_at is null) = 1, 'recipient list shows who is pending');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000002');
+select pg_temp.check((select count(*) from public.my_conversations()) = 0, 'other cohort not in cohort room');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

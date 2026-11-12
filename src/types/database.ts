@@ -4144,6 +4144,16 @@ export type Database = {
         Args: { p_files: Json; p_session: string }
         Returns: undefined
       }
+      announcement_recipients: {
+        Args: { p_announcement: string }
+        Returns: {
+          acknowledged_at: string
+          avatar_url: string
+          full_name: string
+          read_at: string
+          user_id: string
+        }[]
+      }
       announcement_stats: {
         Args: { p_announcement: string }
         Returns: {
@@ -4351,7 +4361,25 @@ export type Database = {
         Args: { p_candidate: string; p_cohort?: string; p_user: string }
         Returns: undefined
       }
+      create_group_conversation: {
+        Args: {
+          p_cohort?: string
+          p_members: string[]
+          p_title: string
+          p_type: Database["public"]["Enums"]["conversation_type"]
+        }
+        Returns: string
+      }
       current_user_context: { Args: never; Returns: Json }
+      document_recipients: {
+        Args: { p_document: string }
+        Returns: {
+          full_name: string
+          read_at: string
+          signed_at: string
+          user_id: string
+        }[]
+      }
       experience_self_check_in: {
         Args: { p_experience: string }
         Returns: {
@@ -4474,6 +4502,22 @@ export type Database = {
         }[]
       }
       my_cohort_ids: { Args: { p_user?: string }; Returns: string[] }
+      my_conversations: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          id: string
+          is_muted: boolean
+          last_message: string
+          last_message_at: string
+          last_sender_name: string
+          member_count: number
+          other_user_id: string
+          title: string
+          type: Database["public"]["Enums"]["conversation_type"]
+          unread: number
+        }[]
+      }
       my_permissions: { Args: never; Returns: string[] }
       neo_progress: {
         Args: { p_student?: string }
