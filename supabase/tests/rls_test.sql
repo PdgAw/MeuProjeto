@@ -306,4 +306,28 @@ end $$;
 select pg_temp.check(true, 'peer cannot read journey of others');
 reset role;
 
+-- --------------------------------------------------- Academic insights ----
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000c');
+select pg_temp.check((select count(*) from public.cohort_students('10000000-0000-0000-0000-00000000000a')) = 2, 'coordination sees cohort roster');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-00000000000d');
+select pg_temp.check((select count(*) from public.subject_results((select id from public.subjects where code = 'EST'))) = 2, 'teacher sees results of own subject');
+do $$ begin
+  begin
+    perform * from public.cohort_students('10000000-0000-0000-0000-00000000000a');
+    raise exception 'FAIL: teacher read cohort risk roster';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'teacher cannot read cohort risk roster');
+reset role;
+select pg_temp.act_as('00000000-0000-0000-0000-000000000001');
+do $$ begin
+  begin
+    perform * from public.subject_results((select id from public.subjects where code = 'EST'));
+    raise exception 'FAIL: student read subject results';
+  exception when insufficient_privilege then null; end;
+end $$;
+select pg_temp.check(true, 'neoleader cannot read class results');
+reset role;
+
 select 'ALL RLS TESTS PASSED' as result;

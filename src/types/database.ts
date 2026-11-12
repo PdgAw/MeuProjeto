@@ -4186,6 +4186,10 @@ export type Database = {
         Args: { p_subject: string; p_user?: string }
         Returns: boolean
       }
+      can_view_cohort_insights: {
+        Args: { p_cohort: string; p_user?: string }
+        Returns: boolean
+      }
       can_view_document: {
         Args: { p_document: string; p_user?: string }
         Returns: boolean
@@ -4243,6 +4247,28 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      cohort_students: {
+        Args: { p_cohort: string }
+        Returns: {
+          attendance_rate: number
+          avatar_url: string
+          enrollment_status: Database["public"]["Enums"]["enrollment_status"]
+          full_name: string
+          last_activity_at: string
+          last_mentoring_at: string
+          lessons_attended: number
+          lessons_past: number
+          mentor_name: string
+          overdue_assignments: number
+          risk_flags: string[]
+          track: Database["public"]["Enums"]["neoleader_track"]
+          user_id: string
+          venture_id: string
+          venture_name: string
+          venture_stage: Database["public"]["Enums"]["venture_stage"]
+          venture_updated_at: string
+        }[]
       }
       community_directory: {
         Args: {
@@ -4525,6 +4551,21 @@ export type Database = {
       studies_subject: {
         Args: { p_subject: string; p_user?: string }
         Returns: boolean
+      }
+      subject_results: {
+        Args: { p_subject: string }
+        Returns: {
+          assignments_due: number
+          attendance_rate: number
+          avatar_url: string
+          average_score: number
+          cohort_name: string
+          full_name: string
+          lessons_attended: number
+          lessons_past: number
+          submitted: number
+          user_id: string
+        }[]
       }
       teaches_student: {
         Args: { p_student: string; p_user?: string }
