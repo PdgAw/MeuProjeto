@@ -120,7 +120,7 @@ function Kpi({ icon, label, value, warn }: { icon: React.ReactNode; label: strin
   return (
     <div className="rounded-lg border bg-card p-4">
       <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">{icon}{label}</p>
-      <p className={cn('mt-1.5 font-display text-2xl font-semibold tabular-nums', warn && 'text-warning')}>{value}</p>
+      <p className={cn('mt-1.5 font-display text-2xl font-bold tabular-nums', warn && 'text-warning')}>{value}</p>
     </div>
   )
 }

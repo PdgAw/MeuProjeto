@@ -36,7 +36,7 @@ export default function JourneyPage() {
           <div className="flex-1">
             <div className="mb-2 flex items-baseline justify-between">
               <span className="text-sm font-medium">Progresso da jornada</span>
-              <span className="font-display text-2xl font-semibold tabular-nums">{summary.percent}%</span>
+              <span className="font-display text-2xl font-bold tabular-nums">{summary.percent}%</span>
             </div>
             <Progress value={summary.percent} className="h-2.5" />
           </div>

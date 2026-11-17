@@ -69,5 +69,5 @@ export default function MentorDashboardPage() {
 }
 
 function Stat({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
-  return <div className="rounded-lg border bg-card p-4"><p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</p><p className={`mt-2 font-display text-3xl font-semibold tabular-nums ${highlight ? 'text-primary' : ''}`}>{value}</p></div>
+  return <div className="rounded-lg border bg-card p-4"><p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</p><p className={`mt-2 font-display text-3xl font-bold tabular-nums ${highlight ? 'text-primary' : ''}`}>{value}</p></div>
 }

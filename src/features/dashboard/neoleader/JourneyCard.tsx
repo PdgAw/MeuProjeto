@@ -16,7 +16,7 @@ export function JourneyCard() {
         <div className="space-y-4">
           <div>
             <div className="mb-2 flex items-baseline justify-between">
-              <span className="font-display text-2xl font-semibold tabular-nums">{percent}%</span>
+              <span className="font-display text-2xl font-bold tabular-nums">{percent}%</span>
               <span className="text-xs text-muted-foreground">{done} de {total} etapas</span>
             </div>
             <Progress value={percent} />

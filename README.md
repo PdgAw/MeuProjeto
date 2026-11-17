@@ -78,6 +78,14 @@ supabase/seed/demo_remove.sql
 Turma "NeoLevel Demo 2026.1" com Neoleaders, professor e Neomentora (`@demo.neolevel.local`).
 Contas de gestão da demo não têm senha; disciplinas da demo usam códigos `DEMO-*`.
 
+## Identidade visual
+
+O app segue o manual da marca NeoLevel (Design System criado a partir de neolevel.com.br):
+tema escuro por padrão em marinho com ciano `#06F9FA`, Sora nos títulos e Inter no texto,
+logo oficial em `public/brand/`. Os tokens ficam em `src/index.css` (tema claro na classe `.light`).
+Ciano como preenchimento usa `bg-primary`; como texto, borda ou marca (barras, gráficos)
+usa `text-primary` / `bg-signal`, que escurecem no tema claro para manter o contraste.
+
 ## Roadmap
 
 | Fase | Escopo | Status |

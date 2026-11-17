@@ -63,7 +63,7 @@ function KpiCard({ kpi, editable, onRecord, onRemove }: { kpi: VentureKpi; edita
       <div className="flex items-start justify-between gap-2">
         <div>
           <p className="text-sm font-medium text-muted-foreground">{name}</p>
-          <p className="font-display text-2xl font-semibold tabular-nums">{fmtKpi(last?.value, kpi.unit)}</p>
+          <p className="font-display text-2xl font-bold tabular-nums">{fmtKpi(last?.value, kpi.unit)}</p>
           {delta !== null && (
             <p className="flex items-center gap-1 text-xs">
               {good === null ? <Minus className="h-3 w-3 text-muted-foreground" /> : good ? <ArrowUpRight className="h-3 w-3 text-success" /> : <ArrowDownRight className="h-3 w-3 text-destructive" />}

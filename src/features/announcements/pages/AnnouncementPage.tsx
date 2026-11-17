@@ -60,9 +60,9 @@ export default function AnnouncementPage() {
               {stats.isPending ? <CardSkeleton lines={1} /> : s && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-2 text-center">
-                    <div><p className="font-display text-2xl font-semibold tabular-nums">{s.sent}</p><p className="text-xs text-muted-foreground">Enviado para</p></div>
-                    <div><p className="font-display text-2xl font-semibold tabular-nums text-success">{s.read}</p><p className="text-xs text-muted-foreground">Visualizado</p></div>
-                    <div><p className="font-display text-2xl font-semibold tabular-nums text-warning">{s.pending}</p><p className="text-xs text-muted-foreground">Pendente</p></div>
+                    <div><p className="font-display text-2xl font-bold tabular-nums">{s.sent}</p><p className="text-xs text-muted-foreground">Enviado para</p></div>
+                    <div><p className="font-display text-2xl font-bold tabular-nums text-success">{s.read}</p><p className="text-xs text-muted-foreground">Visualizado</p></div>
+                    <div><p className="font-display text-2xl font-bold tabular-nums text-warning">{s.pending}</p><p className="text-xs text-muted-foreground">Pendente</p></div>
                   </div>
                   {a.requires_ack && <p className="text-xs text-muted-foreground">{s.acknowledged} confirmaram a leitura.</p>}
                   <ul className="max-h-72 space-y-1.5 overflow-y-auto text-sm">

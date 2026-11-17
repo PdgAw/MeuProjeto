@@ -49,7 +49,7 @@ function MyResults({ subjectId, userId, cohortId }: { subjectId: string; userId:
     <div className="grid gap-4 sm:grid-cols-2">
       <Card><CardContent className="pt-5">
         <p className="text-sm text-muted-foreground">Frequência</p>
-        <p className="font-display text-3xl font-semibold tabular-nums">{past.length ? `${Math.round((100 * attended) / past.length)}%` : '—'}</p>
+        <p className="font-display text-3xl font-bold tabular-nums">{past.length ? `${Math.round((100 * attended) / past.length)}%` : '—'}</p>
         <p className="text-xs text-muted-foreground">{attended} de {past.length} aulas realizadas</p>
       </CardContent></Card>
       <Card><CardContent className="pt-5">

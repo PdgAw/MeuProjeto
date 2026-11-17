@@ -57,7 +57,7 @@ export default function AssignmentPage() {
           {sub && (sub.status === 'reviewed' || sub.status === 'returned') && (
             <Card className="border-primary/30"><CardContent className="space-y-2 pt-5">
               <p className="flex items-center gap-2 font-semibold"><MessageSquareQuote className="h-4 w-4 text-primary" />Avaliação do professor</p>
-              {sub.score !== null && <p className="font-display text-2xl font-semibold">{sub.score}{a.max_score ? ` / ${a.max_score}` : ''}</p>}
+              {sub.score !== null && <p className="font-display text-2xl font-bold">{sub.score}{a.max_score ? ` / ${a.max_score}` : ''}</p>}
               {sub.feedback && <p className="whitespace-pre-line text-sm">{sub.feedback}</p>}
               {sub.status === 'returned' && <Badge variant="warning">Ajuste solicitado: edite e envie novamente</Badge>}
             </CardContent></Card>

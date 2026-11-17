@@ -78,7 +78,7 @@ function Stat({ icon, label, value, sub }: { icon: React.ReactNode; label: strin
   return (
     <div className="rounded-lg border bg-card p-4">
       <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">{icon}{label}</p>
-      <p className="mt-2 font-display text-3xl font-semibold tabular-nums">{value}</p>
+      <p className="mt-2 font-display text-3xl font-bold tabular-nums">{value}</p>
       {sub && <p className="truncate text-xs text-muted-foreground">{sub}</p>}
     </div>
   )
