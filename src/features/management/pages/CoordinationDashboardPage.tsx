@@ -33,7 +33,7 @@ export default function CoordinationDashboardPage() {
         <Select className="w-56" value={cohort} onChange={(e) => setCohort(e.target.value)} aria-label="Turma"><option value="">Todas as turmas</option>{cohorts.data?.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</Select>
       </header>
       {overview.isPending ? <CardSkeleton lines={2} /> : o && (
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           <Kpi icon={<GraduationCap className="h-4 w-4" />} label="Neoleaders ativos" value={o.neoleaders_active} to="/gestao/neoleaders" />
           <Kpi icon={<Users className="h-4 w-4" />} label="Turmas" value={o.cohorts_active} to="/gestao/turmas" />
           <Kpi icon={<BookOpenCheck className="h-4 w-4" />} label="Aulas na semana" value={o.lessons_week} to="/gestao/aulas" />
@@ -44,7 +44,7 @@ export default function CoordinationDashboardPage() {
           <Kpi icon={<Briefcase className="h-4 w-4" />} label="Projetos ativos" value={o.ventures_active} hint={`${atRisk} alunos em risco`} to="/gestao/projetos" />
         </div>
       )}
-      <div className="grid gap-6 lg:grid-cols-[1fr_24rem] [&>*]:min-w-0">
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_24rem] [&>*]:min-w-0">
         <div className="space-y-6">
           <SectionCard title="Neoleaders que pedem atenção" icon={<GraduationCap className="h-4 w-4 text-primary" />} action={{ label: 'Todos', to: '/gestao/neoleaders' }}>
             {students.isPending ? <CardSkeleton /> : !list.filter((s) => s.risk_flags.length).length ? <EmptyState text="Nenhum Neoleader em risco." /> : (
