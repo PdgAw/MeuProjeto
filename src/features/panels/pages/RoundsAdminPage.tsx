@@ -20,7 +20,7 @@ export default function RoundsAdminPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Bancas</h1><p className="mt-1 text-muted-foreground">Rodadas de avaliação de projetos e Venture Capital.</p></div>
+        <div><p className="eyebrow mb-2">Venture Capital</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Bancas</h1><p className="mt-1 text-muted-foreground">Rodadas de avaliação de projetos e Venture Capital.</p></div>
         <div className="flex gap-2"><Button variant="outline" asChild><Link to="/avaliacoes">Minhas avaliações</Link></Button>{canManage && <Button onClick={() => setCreating(true)}><Plus /> Nova banca</Button>}</div>
       </header>
       {isPending ? <CardSkeleton lines={3} /> : !data?.length ? <EmptyState text="Nenhuma banca criada." /> : (

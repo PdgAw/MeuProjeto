@@ -18,7 +18,7 @@ export function PitchStatusTrack({ status }: { status: PitchStatus }) {
         const st = PITCH_STATUS[s as PitchStatus]
         return (
           <li key={s} className="flex items-center gap-2">
-            {i > 0 && <span className={cn('h-px w-4', done || current ? 'bg-primary' : 'bg-border')} />}
+            {i > 0 && <span className={cn('h-px w-4', done || current ? 'bg-signal' : 'bg-border')} />}
             <span className={cn('flex items-center gap-1 rounded-full border px-2.5 py-1 font-medium',
               current && 'border-primary bg-primary text-primary-foreground',
               done && !current && 'border-primary/40 text-primary',

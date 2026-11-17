@@ -37,7 +37,7 @@ export default function CandidatePage() {
       <Link to="/gestao/admissoes" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Admissões</Link>
       <Card><CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 space-y-2">
-          <h1 className="text-2xl font-semibold">{c.full_name}</h1>
+          <p className="eyebrow mb-2">Admissões · Candidato</p><h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{c.full_name}</h1>
           <div className="flex flex-wrap gap-1.5">
             <Badge variant={c.status === 'approved' || c.status === 'enrolled' ? 'success' : c.status === 'rejected' ? 'destructive' : 'default'}>{admissionLabel(c.status)}</Badge>
             {c.profile_type && <Badge variant="accent">{TRACK_LABEL[c.profile_type]}</Badge>}
@@ -94,7 +94,7 @@ export default function CandidatePage() {
           {committee && <CommitteeCard data={data} me={user?.user_id ?? ''} />}
           <SectionCard title="Histórico">
             <ol className="relative space-y-3 border-l-2 border-border pl-5 text-sm">{data.history.map((h) => (
-              <li key={h.id} className="relative"><span className="absolute -left-[1.6rem] top-1.5 h-2.5 w-2.5 rounded-full bg-primary" />
+              <li key={h.id} className="relative"><span className="absolute -left-[1.6rem] top-1.5 h-2.5 w-2.5 rounded-full bg-signal" />
                 <p className="font-medium">{admissionLabel(h.to_status)}</p>
                 <p className="text-xs text-muted-foreground">{format(new Date(h.changed_at), "dd/MM/yyyy HH:mm")}{h.by?.full_name ? ` · ${h.by.full_name}` : ''}</p>
               </li>

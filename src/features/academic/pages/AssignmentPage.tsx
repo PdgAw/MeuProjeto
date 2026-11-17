@@ -36,7 +36,7 @@ export default function AssignmentPage() {
       <Link to={`/disciplinas/${a.subject_id}?aba=entregas`} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />{a.subject?.name}</Link>
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold sm:text-3xl">{a.title}</h1>
+          <p className="eyebrow mb-2">Entrega</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{a.title}</h1>
           <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarClock className="h-4 w-4" />{a.due_at ? `Prazo: ${fmtWhen(a.due_at)}` : 'Sem prazo'}
             {overdue && <Badge variant="destructive">Prazo encerrado</Badge>}

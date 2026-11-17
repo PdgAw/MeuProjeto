@@ -24,7 +24,7 @@ export default function MentorsAdminPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Neomentores</h1><p className="mt-1 text-muted-foreground">Quem mentora quem — e o foco de cada vínculo.</p></div>
+        <div><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Neomentores</h1><p className="mt-1 text-muted-foreground">Quem mentora quem — e o foco de cada vínculo.</p></div>
         {canManage && <Button onClick={() => setAssigning(null)}><Link2 /> Vincular Neoleader</Button>}
       </header>
       {isPending ? <CardSkeleton lines={3} /> : !data?.length ? <EmptyState text="Nenhum Neomentor cadastrado. Convide Neomentores em Usuários." /> : (

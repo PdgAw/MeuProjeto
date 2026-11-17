@@ -30,7 +30,7 @@ export function VentureCard({ userId }: { userId: string }) {
           <div>
             <ol className="grid grid-cols-6 gap-1" aria-label="Estágio do negócio">
               {VENTURE_STAGES.map((s, i) => (
-                <li key={s.key} className={cn('h-1.5 rounded-full', i <= stageIdx ? 'bg-primary' : 'bg-secondary')} title={s.label} />
+                <li key={s.key} className={cn('h-1.5 rounded-full', i <= stageIdx ? 'bg-signal' : 'bg-secondary')} title={s.label} />
               ))}
             </ol>
             <div className="mt-2 flex justify-between text-xs">

@@ -38,7 +38,7 @@ export default function CohortDetailPage() {
     <div className="space-y-6">
       <Link to="/gestao/turmas" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Turmas</Link>
       <header className="flex flex-wrap items-start justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">{c.name}</h1>
+        <div><p className="eyebrow mb-2">Turma</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{c.name}</h1>
           <p className="mt-1 text-muted-foreground">{c.coordinator ? `Coordenação: ${c.coordinator.full_name}` : 'Sem coordenador definido'}</p></div>
         {canEdit && <Button variant="outline" onClick={() => setEditing(true)}><Pencil /> Editar turma</Button>}
       </header>

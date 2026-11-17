@@ -39,7 +39,7 @@ export default function MenteePage() {
         <div className="flex items-center gap-4">
           <Avatar className="h-16 w-16">{m.avatar_url && <AvatarImage src={m.avatar_url} alt="" />}<AvatarFallback className="text-lg">{initials(m.full_name)}</AvatarFallback></Avatar>
           <div>
-            <h1 className="text-2xl font-semibold">{m.full_name}</h1>
+            <p className="eyebrow mb-2">Neoleader</p><h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{m.full_name}</h1>
             <p className="text-muted-foreground">{m.track ? TRACK_LABEL[m.track] : ''}{m.cohort_name ? ` · ${m.cohort_name}` : ''}</p>
             <div className="mt-1 flex flex-wrap gap-1.5">{m.focus && <Badge variant="secondary">Foco: {m.focus}</Badge>}{m.flags.map((f) => <Badge key={f} variant="warning">{MENTEE_FLAG[f]}</Badge>)}</div>
           </div>

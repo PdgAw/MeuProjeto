@@ -29,7 +29,7 @@ export default function CoordinationDashboardPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">{greeting()}, {firstName(user.preferred_name || user.full_name)}.</h1><p className="mt-1 text-muted-foreground">Visão geral da evolução dos Neoleaders.</p></div>
+        <div><p className="eyebrow mb-2">Coordenação</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{greeting()}, <span className="text-primary">{firstName(user.preferred_name || user.full_name)}</span>.</h1><p className="mt-1 text-muted-foreground">Visão geral da evolução dos Neoleaders.</p></div>
         <Select className="w-56" value={cohort} onChange={(e) => setCohort(e.target.value)} aria-label="Turma"><option value="">Todas as turmas</option>{cohorts.data?.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</Select>
       </header>
       {overview.isPending ? <CardSkeleton lines={2} /> : o && (

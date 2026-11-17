@@ -9,7 +9,7 @@ export default function TodayPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold sm:text-3xl">Hoje</h1>
+        <p className="eyebrow mb-2">Hoje na NeoLevel</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Hoje</h1>
         <p className="mt-1 first-letter:uppercase text-muted-foreground">{fmtDateLong(new Date())}</p>
       </header>
       <div className="grid gap-6 lg:grid-cols-[1fr_24rem] [&>*]:min-w-0">

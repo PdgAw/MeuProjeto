@@ -50,7 +50,7 @@ export default function Student360Page() {
       <Card><CardContent className="flex flex-col gap-5 pt-6 lg:flex-row lg:items-center">
         <Avatar className="h-20 w-20">{s.profile.avatar_url && <AvatarImage src={s.profile.avatar_url} alt="" />}<AvatarFallback className="text-xl">{initials(s.profile.full_name)}</AvatarFallback></Avatar>
         <div className="min-w-0 flex-1 space-y-2">
-          <h1 className="text-2xl font-semibold">{s.profile.full_name}</h1>
+          <p className="eyebrow mb-2">Perfil 360º</p><h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{s.profile.full_name}</h1>
           <div className="flex flex-wrap gap-1.5">
             {enr?.cohort && <Badge>{enr.cohort.name}</Badge>}
             {s.neo && <Badge variant="accent">{s.neo.track === 'other' ? s.neo.track_other_label : TRACK_LABEL[s.neo.track]}</Badge>}
@@ -240,7 +240,7 @@ function TimelineList({ items }: { items: { id: string; title: string; occurred_
     <ol className="relative space-y-3 border-l-2 border-border pl-5">
       {items.map((a) => (
         <li key={a.id} className="relative text-sm">
-          <span className="absolute -left-[1.6rem] top-1.5 h-2.5 w-2.5 rounded-full bg-primary" />
+          <span className="absolute -left-[1.6rem] top-1.5 h-2.5 w-2.5 rounded-full bg-signal" />
           <p className="font-medium"><span className="mr-2 tabular-nums text-muted-foreground">{format(new Date(a.occurred_at), 'dd/MM', { locale: ptBR })}</span>{a.title}</p>
           {a.dimension && <p className="text-xs text-muted-foreground">{DIMENSION_LABEL[a.dimension]}</p>}
         </li>

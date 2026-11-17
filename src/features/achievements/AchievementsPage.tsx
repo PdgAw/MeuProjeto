@@ -23,18 +23,18 @@ export default function AchievementsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Conquistas</h1><p className="mt-1 text-muted-foreground">Marcos da sua evolução como empreendedor e líder.</p></div>
-        <div className="flex items-center gap-3"><Award className="h-8 w-8 text-accent" /><p><span className="font-display text-3xl font-semibold">{unlocked}</span><span className="text-muted-foreground"> / {list.length}</span></p></div>
+        <div><p className="eyebrow mb-2">Sua evolução</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Conquistas</h1><p className="mt-1 text-muted-foreground">Marcos da sua evolução como empreendedor e líder.</p></div>
+        <div className="flex items-center gap-3 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2.5"><Award className="h-7 w-7 text-primary" /><p className="leading-none"><span className="font-display text-3xl font-bold tabular-nums text-primary">{unlocked}</span><span className="text-muted-foreground"> / {list.length}</span><span className="mt-1 block text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">conquistadas</span></p></div>
       </header>
       {categories.map((cat) => (
         <section key={cat} className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{cat}</h2>
+          <h2 className="eyebrow">{cat}</h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {list.filter((a) => a.category === cat).map((a) => {
               const Icon = ICONS[a.icon] ?? Award
               return (
-                <Card key={a.key} className={cn('flex gap-4 p-4', !a.unlocked && 'bg-muted/40')}>
-                  <span className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-full', a.unlocked ? 'bg-sidebar text-accent' : 'bg-secondary text-muted-foreground')}>
+                <Card key={a.key} className={cn('flex gap-4 p-4 transition-colors', a.unlocked ? 'border-primary/30' : 'bg-muted/40 shadow-none')}>
+                  <span className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-full', a.unlocked ? 'bg-primary/12 text-primary ring-1 ring-inset ring-primary/30' : 'bg-secondary text-muted-foreground')}>
                     {a.unlocked ? <Icon className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
                   </span>
                   <div className="min-w-0 flex-1 space-y-1">

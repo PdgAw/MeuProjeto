@@ -33,7 +33,7 @@ export default function RoundAdminPage() {
     <div className="space-y-6">
       <Link to="/gestao/bancas" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Bancas</Link>
       <header className="flex flex-wrap items-start justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">{r.name}</h1><div className="mt-1 flex gap-2"><Badge>{ROUND_STATUS[r.status]}</Badge>{r.location && <span className="text-sm text-muted-foreground">{r.location}</span>}</div></div>
+        <div><p className="eyebrow mb-2">Banca</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{r.name}</h1><div className="mt-1 flex gap-2"><Badge>{ROUND_STATUS[r.status]}</Badge>{r.location && <span className="text-sm text-muted-foreground">{r.location}</span>}</div></div>
         {canManage && <Button variant="outline" onClick={() => setEditing(true)}><Pencil /> Editar banca</Button>}
       </header>
       <Tabs defaultValue="submissoes">

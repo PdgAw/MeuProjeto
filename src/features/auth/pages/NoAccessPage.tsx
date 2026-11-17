@@ -14,7 +14,7 @@ export default function NoAccessPage() {
       <Logo />
       <ShieldAlert className="h-10 w-10 text-warning" />
       <div className="max-w-md space-y-2">
-        <h1 className="text-2xl font-semibold">{byStatus ? 'Acesso indisponível' : 'Sem permissão'}</h1>
+        <h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{byStatus ? 'Acesso indisponível' : 'Sem permissão'}</h1>
         <p className="text-muted-foreground">
           {byStatus
             ? 'Sua conta está inativa ou suspensa. Fale com a secretaria NeoLevel para reativar o acesso.'

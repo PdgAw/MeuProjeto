@@ -62,7 +62,7 @@ export default function ProfilePage() {
             onChange={(e) => { const f = e.target.files?.[0]; if (f) avatar.mutate(f, { onSuccess: () => toast.success('Foto atualizada.'), onError: (er) => toast.error(er.message) }) }} />
         </label>
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold sm:text-3xl">{data?.profile.full_name}</h1>
+          <p className="eyebrow mb-2">Meu perfil</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{data?.profile.full_name}</h1>
           <div className="flex flex-wrap gap-1.5">{user.roles.map((r) => <Badge key={r.key}>{r.name}</Badge>)}{user.cohort && <Badge variant="outline">{user.cohort.name}</Badge>}{user.track && <Badge variant="accent">{TRACK_LABEL[user.track]}</Badge>}</div>
           {professional && <Link to={`/professores/${user.user_id}`} className="text-sm text-primary hover:underline">Editar perfil profissional (especialidades, links)</Link>}
         </div>
@@ -99,7 +99,7 @@ export default function ProfilePage() {
                 <li key={k}>
                   <label className="flex cursor-pointer items-center justify-between gap-3 rounded-md p-2 text-sm hover:bg-secondary/50">
                     <span className="flex items-center gap-2">{privacy[k] ? <Eye className="h-4 w-4 text-primary" /> : <EyeOff className="h-4 w-4 text-muted-foreground" />}{l}</span>
-                    <input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary))]" checked={privacy[k]} disabled={k !== 'directory' && !privacy.directory}
+                    <input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary-text))]" checked={privacy[k]} disabled={k !== 'directory' && !privacy.directory}
                       onChange={(e) => setPrivacy({ ...privacy, [k]: e.target.checked })} />
                   </label>
                 </li>

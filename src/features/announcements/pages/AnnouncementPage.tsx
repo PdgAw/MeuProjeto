@@ -38,7 +38,7 @@ export default function AnnouncementPage() {
             {a.status === 'draft' && <Badge variant="outline">Rascunho</Badge>}
             {new Date(a.publish_at) > new Date() && <Badge variant="warning">Agendado</Badge>}
           </div>
-          <h1 className="text-2xl font-semibold">{a.title}</h1>
+          <h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{a.title}</h1>
           <p className="text-sm text-muted-foreground">{a.author?.full_name} · {format(new Date(a.publish_at), "dd 'de' MMMM 'às' HH:mm", { locale: ptBR })}</p>
           <p className="whitespace-pre-line leading-relaxed">{a.body}</p>
           {a.attachments.length > 0 && (

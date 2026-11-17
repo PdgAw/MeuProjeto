@@ -24,6 +24,8 @@ export default {
         background: token('background'),
         foreground: token('foreground'),
         body: token('text'),
+        // Cyan for marks (bars, dots, chart strokes): bright on dark, teal on light (3:1+ on white).
+        signal: token('primary-text'),
         primary: { DEFAULT: token('primary'), foreground: token('primary-foreground') },
         secondary: { DEFAULT: token('secondary'), foreground: token('secondary-foreground') },
         muted: { DEFAULT: token('muted'), foreground: token('muted-foreground') },

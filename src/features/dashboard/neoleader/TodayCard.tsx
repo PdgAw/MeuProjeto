@@ -3,7 +3,9 @@ import { endOfDay, startOfDay } from 'date-fns'
 import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { CardSkeleton, EmptyState, SectionCard } from '@/components/shared/SectionCard'
+import { Link } from 'react-router-dom'
+import { SignalWaves } from '@/components/brand/SignalWaves'
+import { CardSkeleton, SectionCard } from '@/components/shared/SectionCard'
 import { AGENDA_TYPE_LABEL, LESSON_TYPE_LABEL, agendaSubtitle } from '@/config/labels'
 import { useSelfCheckIn } from '@/features/academic/api'
 import { useAgenda, useTodayLessons, type TodayLesson } from '@/features/agenda/api'
@@ -20,20 +22,27 @@ export function TodayCard({ userId }: { userId: string }) {
 
   return (
     <SectionCard
-      title={<span className="tracking-wide">HOJE NA NEOLEVEL</span>}
+      title="Hoje na NeoLevel"
       icon={<CalendarCheck2 className="h-4 w-4 text-primary" />}
       action={{ label: 'Ver dia', to: '/hoje' }}
     >
       {loading ? (
         <CardSkeleton lines={2} />
       ) : empty ? (
-        <EmptyState text="Nada agendado para hoje. Bom dia para avançar no seu negócio." />
+        <div className="flex items-center gap-4 rounded-md bg-secondary/50 px-4 py-3">
+          <SignalWaves className="h-9 w-9 shrink-0" />
+          <div className="min-w-0">
+            <p className="font-medium text-foreground">Nada agendado para hoje.</p>
+            <p className="text-sm text-muted-foreground">Bom dia para avançar no seu negócio.</p>
+          </div>
+          <Button asChild variant="outline" size="sm" className="ml-auto hidden shrink-0 sm:inline-flex"><Link to="/meu-negocio">Abrir Meu Negócio</Link></Button>
+        </div>
       ) : (
         <ul className="divide-y">
           {lessons.data?.map((l) => <LessonRow key={l.id} lesson={l} />)}
           {others.map((i) => (
             <li key={`${i.source}-${i.source_id}`} className="flex gap-4 py-3 first:pt-0 last:pb-0">
-              <span className="w-20 shrink-0 font-display text-lg font-semibold tabular-nums">{fmtTime(i.starts_at)}</span>
+              <span className="w-20 shrink-0 font-display text-lg font-bold tabular-nums text-primary">{fmtTime(i.starts_at)}</span>
               <div className="min-w-0 flex-1">
                 <p className="font-medium">{i.title}</p>
                 <p className="text-sm text-muted-foreground">{AGENDA_TYPE_LABEL[i.item_type]}{agendaSubtitle(i) ? ` · ${agendaSubtitle(i)}` : ''}</p>
@@ -53,7 +62,7 @@ function LessonRow({ lesson: l }: { lesson: TodayLesson }) {
 
   return (
     <li className="flex flex-col gap-3 py-3 first:pt-0 last:pb-0 sm:flex-row sm:items-start">
-      <span className="w-20 shrink-0 font-display text-2xl font-semibold tabular-nums">{fmtTime(l.starts_at)}</span>
+      <span className="w-20 shrink-0 font-display text-2xl font-bold tabular-nums text-primary">{fmtTime(l.starts_at)}</span>
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex flex-wrap items-center gap-2">
           <p className="font-semibold">{l.subject?.name ?? l.title}</p>

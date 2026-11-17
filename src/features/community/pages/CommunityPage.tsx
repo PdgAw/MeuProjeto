@@ -39,7 +39,7 @@ export default function CommunityPage() {
 
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Comunidade Neo</h1>
+      <header><p className="eyebrow mb-2">Ecossistema</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Comunidade Neo</h1>
         <p className="mt-1 text-muted-foreground">Neoleaders, Neomentores e professores. Cada pessoa decide o que compartilha. <Link to="/perfil" className="text-primary hover:underline">Ajustar minha privacidade</Link></p></header>
       <Tabs defaultValue="diretorio">
         <TabsList>

@@ -77,7 +77,7 @@ function GoalDialog({ ownerId, source, sessionId, goal, onClose }: { ownerId: st
           </div>
           <FormField id="g-prog" label={`Progresso: ${v.status === 'done' ? 100 : v.progress}%`}>
             <input id="g-prog" type="range" min={0} max={100} step={5} value={v.status === 'done' ? 100 : v.progress} disabled={v.status === 'done'}
-              onChange={(e) => setV({ ...v, progress: Number(e.target.value) })} className="w-full accent-[hsl(var(--primary))]" />
+              onChange={(e) => setV({ ...v, progress: Number(e.target.value) })} className="w-full accent-[hsl(var(--primary-text))]" />
           </FormField>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>

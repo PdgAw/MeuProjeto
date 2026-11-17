@@ -21,7 +21,7 @@ export default function CohortsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Turmas</h1><p className="mt-1 text-muted-foreground">Coortes de Neoleaders e seus indicadores.</p></div>
+        <div><p className="eyebrow mb-2">Gestão acadêmica</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Turmas</h1><p className="mt-1 text-muted-foreground">Coortes de Neoleaders e seus indicadores.</p></div>
         {canCreate && <Button onClick={() => setCreating(true)}><Plus /> Nova turma</Button>}
       </header>
       {isPending ? <CardSkeleton lines={3} /> : !data?.length ? <EmptyState text="Nenhuma turma cadastrada." /> : (

@@ -16,7 +16,7 @@ export default function EvaluatePage() {
   return (
     <div className="space-y-6">
       <Link to="/avaliacoes" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Avaliações</Link>
-      <header><p className="text-sm text-muted-foreground">{p.round?.name}</p><h1 className="text-2xl font-semibold sm:text-3xl">Avaliar pitch</h1></header>
+      <header><p className="eyebrow mb-2">{p.round?.name}</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Avaliar pitch</h1></header>
       <div className="grid gap-6 xl:grid-cols-[1fr_28rem] [&>*]:min-w-0">
         <PitchView pitch={p} />
         <SectionCard title="Sua avaliação" className="h-fit xl:sticky xl:top-20">

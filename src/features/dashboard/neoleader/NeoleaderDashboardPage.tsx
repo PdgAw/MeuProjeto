@@ -24,7 +24,7 @@ export default function NeoleaderDashboardPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold sm:text-3xl">{greeting()}, {firstName(user.preferred_name || user.full_name)}.</h1>
+        <p className="eyebrow mb-2">Sua jornada NeoLevel</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{greeting()}, <span className="text-primary">{firstName(user.preferred_name || user.full_name)}</span>.</h1>
         <p className="mt-1 text-muted-foreground">Veja o que está acontecendo na sua jornada NeoLevel.</p>
       </header>
 

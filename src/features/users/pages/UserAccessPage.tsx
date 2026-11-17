@@ -38,7 +38,7 @@ export default function UserAccessPage() {
       <Card><CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center">
         <Avatar className="h-16 w-16">{data.profile.avatar_url && <AvatarImage src={data.profile.avatar_url} alt="" />}<AvatarFallback>{initials(data.profile.full_name)}</AvatarFallback></Avatar>
         <div className="min-w-0 flex-1">
-          <h1 className="text-2xl font-semibold">{data.profile.full_name}</h1>
+          <p className="eyebrow mb-2">Gestão · Usuário</p><h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{data.profile.full_name}</h1>
           <p className="flex flex-wrap items-center gap-x-3 text-sm text-muted-foreground">{data.profile.private?.email && <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" />{data.profile.private.email}</span>}
             <span>Último acesso {data.profile.last_seen_at ? fmtRelative(data.profile.last_seen_at) : 'nunca'}</span></p>
         </div>

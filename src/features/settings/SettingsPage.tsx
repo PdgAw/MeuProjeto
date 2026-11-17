@@ -25,7 +25,7 @@ export default function SettingsPage() {
   const [tab, setTab] = useState(settings ? 'progresso' : 'permissoes')
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Configurações</h1><p className="mt-1 text-muted-foreground">Regras da jornada, catálogos e permissões da plataforma.</p></header>
+      <header><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Configurações</h1><p className="mt-1 text-muted-foreground">Regras da jornada, catálogos e permissões da plataforma.</p></header>
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList className="w-full justify-start">
           {settings && <><TabsTrigger value="progresso">Neo Progress</TabsTrigger><TabsTrigger value="checkpoints">Checkpoints das trilhas</TabsTrigger><TabsTrigger value="milestones">Milestones</TabsTrigger><TabsTrigger value="kpis">KPIs</TabsTrigger></>}

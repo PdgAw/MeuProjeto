@@ -25,7 +25,7 @@ export default function MyRequestsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Solicitações</h1><p className="mt-1 text-muted-foreground">Peça documentos, declarações, alterações cadastrais ou suporte à secretaria.</p></div>
+        <div><p className="eyebrow mb-2">Secretaria</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Solicitações</h1><p className="mt-1 text-muted-foreground">Peça documentos, declarações, alterações cadastrais ou suporte à secretaria.</p></div>
         <NewRequestDialog onCreated={(id) => setParams({ id })} />
       </header>
       {isPending ? <CardSkeleton lines={4} /> : !data?.length ? <EmptyState icon={<Inbox className="h-8 w-8" />} text="Você ainda não abriu nenhuma solicitação." /> : (

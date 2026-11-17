@@ -53,7 +53,7 @@ export function OverviewTab({ venture: v, editable }: { venture: VentureDetail; 
           <ol className="space-y-3 border-l-2 border-primary/30 pl-4 text-sm">
             {history.map((h) => (
               <li key={h.id} className="relative">
-                <span className="absolute -left-[1.4rem] top-1 h-2.5 w-2.5 rounded-full bg-primary" />
+                <span className="absolute -left-[1.4rem] top-1 h-2.5 w-2.5 rounded-full bg-signal" />
                 <p className="font-medium">{stageLabel(h.to_stage)}</p>
                 <p className="text-xs text-muted-foreground">{format(new Date(h.changed_at), "dd 'de' MMM yyyy", { locale: ptBR })}</p>
               </li>

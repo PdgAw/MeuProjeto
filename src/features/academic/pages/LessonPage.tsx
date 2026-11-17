@@ -50,7 +50,7 @@ export default function LessonPage() {
             <Badge variant="outline">{MODALITY_LABEL[l.modality]}</Badge>
             {l.status === 'canceled' && <Badge variant="destructive">Cancelada</Badge>}
           </div>
-          <h1 className="text-2xl font-semibold sm:text-3xl">{l.title}</h1>
+          <h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{l.title}</h1>
           <p className="mt-1 first-letter:uppercase text-muted-foreground">{format(new Date(l.starts_at), "EEEE, dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
         {canTeach && <Button variant="outline" onClick={() => setEditing(true)}><Pencil /> Editar aula</Button>}

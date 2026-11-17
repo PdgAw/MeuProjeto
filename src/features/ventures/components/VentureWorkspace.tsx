@@ -25,11 +25,11 @@ export function VentureWorkspace({ venture: v, editable, isOwner, track }: Props
     <div className="space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl bg-sidebar font-display text-xl font-semibold text-accent">
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg bg-primary/12 font-display text-2xl font-bold text-primary ring-1 ring-inset ring-primary/30">
             {v.logo_url ? <img src={v.logo_url} alt="" className="h-full w-full object-cover" /> : initials(v.name)}
           </div>
           <div>
-            <h1 className="text-2xl font-semibold sm:text-3xl">{v.name}</h1>
+            <p className="eyebrow mb-2">Projeto empresarial</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{v.name}</h1>
             {v.tagline && <p className="text-muted-foreground">{v.tagline}</p>}
             <div className="mt-1 flex flex-wrap gap-1.5">
               {!isOwner && v.owner && <Badge variant="secondary">{v.owner.full_name}</Badge>}

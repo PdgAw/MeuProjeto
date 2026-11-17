@@ -20,7 +20,7 @@ export default function VenturesAdminPage() {
   const max = Math.max(1, ...VENTURE_STAGES.map((s) => all.filter((v) => v.stage === s.key).length))
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Projetos</h1><p className="mt-1 text-muted-foreground">Negócios dos Neoleaders por estágio.</p></header>
+      <header><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Projetos</h1><p className="mt-1 text-muted-foreground">Negócios dos Neoleaders por estágio.</p></header>
       <Card className="p-5">
         <p className="mb-3 text-sm font-semibold">Projetos por estágio</p>
         <div className="grid grid-cols-6 items-end gap-2" role="list" aria-label="Projetos por estágio (clique para filtrar)">

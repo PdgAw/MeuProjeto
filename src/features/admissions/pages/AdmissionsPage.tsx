@@ -27,7 +27,7 @@ export default function AdmissionsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Admissões</h1><p className="mt-1 text-muted-foreground">{open} candidatos em processo · {(data ?? []).filter((c) => c.status === 'enrolled').length} matriculados</p></div>
+        <div><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Admissões</h1><p className="mt-1 text-muted-foreground">{open} candidatos em processo · {(data ?? []).filter((c) => c.status === 'enrolled').length} matriculados</p></div>
         {hasPermission('admissions.manage') && <CandidateFormDialog trigger={<Button><Plus />Novo candidato</Button>} onSaved={(id) => navigate(`/gestao/admissoes/${id}`)} />}
       </header>
       <div className="flex flex-wrap items-center gap-2">

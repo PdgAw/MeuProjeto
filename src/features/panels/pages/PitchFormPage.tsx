@@ -65,8 +65,8 @@ export default function PitchFormPage() {
     <div className="space-y-6">
       <Link to="/bancas" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Bancas</Link>
       <header className="space-y-2">
-        <p className="text-sm text-muted-foreground">{round.data.name}</p>
-        <h1 className="text-2xl font-semibold sm:text-3xl">Pitch · {primary.data.name}</h1>
+        <p className="eyebrow">{round.data.name}</p>
+        <h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Pitch · {primary.data.name}</h1>
         {existing && <PitchStatusTrack status={existing.status} />}
       </header>
       {!editable && (

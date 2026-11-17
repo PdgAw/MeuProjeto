@@ -29,7 +29,7 @@ export function StageStepper({ venture, editable }: { venture: VentureDetail; ed
               )}
               aria-current={current ? 'step' : undefined}
             >
-              <span className={cn('h-1.5 rounded-full', i <= idx ? 'bg-primary' : 'bg-secondary')} />
+              <span className={cn('h-1.5 rounded-full', i <= idx ? 'bg-signal' : 'bg-secondary')} />
               <span className="flex items-center gap-1 text-xs font-medium">
                 {done && <Check className="h-3 w-3 text-primary" />}{s.label}
               </span>

@@ -48,8 +48,8 @@ export default function SubjectDetailPage() {
       <Link to="/disciplinas" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Disciplinas</Link>
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="font-mono text-xs font-semibold tracking-wider text-primary">{s.code}</p>
-          <h1 className="text-2xl font-semibold sm:text-3xl">{s.name}</h1>
+          <p className="eyebrow mb-2">Disciplina · {s.code}</p>
+          <h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{s.name}</h1>
           <div className="mt-2 flex flex-wrap gap-2">
             {isTeacher && <Badge>Você leciona</Badge>}
             {s.status === 'archived' && <Badge variant="secondary">Arquivada</Badge>}

@@ -35,7 +35,7 @@ function StudentView({ userId }: { userId: string }) {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Neomentoria</h1><p className="mt-1 text-muted-foreground">Seus Neomentores, sessões, metas e plano de ação.</p></div>
+        <div><p className="eyebrow mb-2">Neomentoria</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Neomentoria</h1><p className="mt-1 text-muted-foreground">Seus Neomentores, sessões, metas e plano de ação.</p></div>
         {mentorOptions.length > 0 && <Button onClick={() => setRequesting(mentorOptions[0].id)}><Plus /> Solicitar mentoria</Button>}
       </header>
 
@@ -53,7 +53,7 @@ function StudentView({ userId }: { userId: string }) {
                 <div className="mt-2 flex flex-wrap gap-1">{m.professional_profiles?.specialties.slice(0, 3).map((s) => <Badge key={s} variant="secondary">{s}</Badge>)}</div>
               </div>
               <div className="flex gap-2 sm:flex-col">
-                <Button size="sm" onClick={() => setRequesting(m.id)}><Sparkles /> Solicitar</Button>
+                <Button size="sm" variant="accent" onClick={() => setRequesting(m.id)}><Sparkles /> Solicitar</Button>
                 <StartChatButton size="sm" variant="outline" userId={m.id} />
               </div>
             </Card>
@@ -95,7 +95,7 @@ function MentorView({ userId }: { userId: string }) {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Mentorias</h1><p className="mt-1 text-muted-foreground">Solicitações, agenda e histórico das suas Neomentorias.</p></div>
+        <div><p className="eyebrow mb-2">Neomentoria</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Mentorias</h1><p className="mt-1 text-muted-foreground">Solicitações, agenda e histórico das suas Neomentorias.</p></div>
         <Button onClick={() => setScheduling(true)} disabled={!menteeOptions.length}><Plus /> Agendar mentoria</Button>
       </header>
       <Tabs value={tab ?? (requests.length ? 'requests' : 'upcoming')} onValueChange={setTab}>

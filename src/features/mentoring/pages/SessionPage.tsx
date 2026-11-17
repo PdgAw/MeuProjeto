@@ -51,8 +51,8 @@ export default function SessionPage() {
         <div className="flex items-center gap-4">
           <Avatar className="h-14 w-14">{other?.avatar_url && <AvatarImage src={other.avatar_url} alt="" />}<AvatarFallback>{initials(other?.full_name)}</AvatarFallback></Avatar>
           <div>
-            <p className="text-sm text-muted-foreground">{isStudent ? 'Neomentoria com' : 'Neomentoria de'}</p>
-            <h1 className="text-2xl font-semibold">{other?.full_name}</h1>
+            <p className="eyebrow mb-1">{isStudent ? 'Neomentoria com' : 'Neomentoria de'}</p>
+            <h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{other?.full_name}</h1>
             <div className="mt-1 flex gap-2"><Badge variant={st.variant}>{st.label}</Badge>{s.topics.map((t) => <Badge key={t} variant="outline">{t}</Badge>)}</div>
           </div>
         </div>

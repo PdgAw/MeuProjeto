@@ -24,7 +24,7 @@ export default function PanelsPage() {
   const open = (rounds.data ?? []).filter((r) => r.status === 'open')
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Bancas e Venture Capital</h1>
+      <header><p className="eyebrow mb-2">Aceleração de negócios</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Bancas e Venture Capital</h1>
         <p className="mt-1 text-muted-foreground">Apresente seu negócio para a banca NeoLevel e investidores convidados.</p></header>
 
       <SectionCard title="Meus pitches" icon={<Presentation className="h-4 w-4 text-primary" />}>

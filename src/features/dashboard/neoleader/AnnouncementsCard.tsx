@@ -13,7 +13,7 @@ export function AnnouncementsCard({ userId }: { userId: string }) {
         <ul className="space-y-3">
           {data.map((a) => (
             <li key={a.id} className="flex gap-3">
-              <span className={cn('mt-1.5 h-2 w-2 shrink-0 rounded-full', a.isRead ? 'bg-transparent' : 'bg-primary')}
+              <span className={cn('mt-1.5 h-2 w-2 shrink-0 rounded-full', a.isRead ? 'bg-transparent' : 'bg-signal')}
                 aria-label={a.isRead ? undefined : 'Não lido'} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">

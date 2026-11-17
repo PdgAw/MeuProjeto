@@ -47,7 +47,7 @@ export default function ExperiencePage() {
         <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,hsl(var(--primary)/0.55),transparent_55%)]" />
         <div className="relative space-y-3">
           <Badge variant="accent">{CATEGORY[x.category]}</Badge>
-          <h1 className="text-2xl font-semibold sm:text-3xl">{x.title}</h1>
+          <h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{x.title}</h1>
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-sidebar-muted">
             <span className="flex items-center gap-1.5 first-letter:uppercase"><CalendarDays className="h-4 w-4" />{format(start, "EEEE, dd 'de' MMMM · HH:mm", { locale: ptBR })}{x.ends_at ? `–${format(end, 'HH:mm')}` : ''}</span>
             {x.location && <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4" />{x.location}</span>}

@@ -24,7 +24,7 @@ export function SubjectCard({ subject: s, cohortId }: { subject: Subject; cohort
           ) : (
             <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--primary)/0.55),transparent_60%)]" />
           )}
-          <span className="absolute left-4 top-3 font-mono text-[11px] font-semibold tracking-wider text-accent">{s.code}</span>
+          <span className="absolute left-4 top-3 font-display text-[11px] font-bold uppercase tracking-[0.2em] text-neo">{s.code}</span>
           <BookOpen className="absolute bottom-3 right-4 h-5 w-5 text-white/60" />
         </div>
         <div className="flex flex-1 flex-col gap-3 p-4">

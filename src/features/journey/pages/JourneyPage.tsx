@@ -25,7 +25,7 @@ export default function JourneyPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-2xl font-semibold sm:text-3xl">Minha Jornada</h1>
+        <p className="eyebrow mb-2">Jornada de 2 anos</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Minha Jornada</h1>
         <p className="text-muted-foreground">
           Seus dois anos na NeoLevel{user.cohort ? ` · ${user.cohort.name}` : ''}: disciplinas, experiências, bancas e marcos.
         </p>

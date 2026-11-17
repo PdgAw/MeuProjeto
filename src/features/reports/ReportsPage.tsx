@@ -124,7 +124,7 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Relatórios</h1><p className="mt-1 text-muted-foreground">Exporte em CSV (abre no Excel e no Google Planilhas). Os dados respeitam suas permissões.</p></header>
+      <header><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Relatórios</h1><p className="mt-1 text-muted-foreground">Exporte em CSV (abre no Excel e no Google Planilhas). Os dados respeitam suas permissões.</p></header>
       <Card><CardContent className="flex flex-wrap items-end gap-3 pt-6">
         <label className="space-y-1 text-xs font-medium">De<Input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="w-40" /></label>
         <label className="space-y-1 text-xs font-medium">Até<Input type="date" value={to} onChange={(e) => setTo(e.target.value)} className="w-40" /></label>

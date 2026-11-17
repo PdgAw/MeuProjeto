@@ -59,7 +59,7 @@ function AddMilestones({ venture, track, onClose }: { venture: VentureDetail; tr
         <div className="space-y-2">
           {available.map((t) => (
             <label key={t.id} className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 text-sm hover:bg-secondary/50">
-              <input type="checkbox" checked={picked.includes(t.id)} onChange={() => setPicked(picked.includes(t.id) ? picked.filter((x) => x !== t.id) : [...picked, t.id])} className="h-4 w-4 accent-[hsl(var(--primary))]" />
+              <input type="checkbox" checked={picked.includes(t.id)} onChange={() => setPicked(picked.includes(t.id) ? picked.filter((x) => x !== t.id) : [...picked, t.id])} className="h-4 w-4 accent-[hsl(var(--primary-text))]" />
               {t.title}
             </label>
           ))}

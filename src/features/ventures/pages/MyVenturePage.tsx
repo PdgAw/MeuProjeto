@@ -22,7 +22,7 @@ export default function MyVenturePage() {
     const successor = user.track === 'successor'
     return (
       <div className="space-y-6">
-        <header><h1 className="text-2xl font-semibold sm:text-3xl">Meu Negócio</h1>
+        <header><p className="eyebrow mb-2">Projeto empresarial</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Meu Negócio</h1>
           <p className="mt-1 text-muted-foreground">{successor ? 'A empresa da sua família e os projetos que você lidera nela.' : 'Seu projeto empresarial: do problema à escala, com indicadores e plano de execução.'}</p></header>
         {successor && <FamilyBusinessCard ownerId={user.user_id} editable />}
         <Card className="overflow-hidden">

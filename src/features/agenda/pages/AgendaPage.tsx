@@ -22,7 +22,7 @@ type View = 'day' | 'week' | 'month' | 'list'
 type T = AgendaItem['item_type']
 const TYPES = Object.keys(AGENDA_TYPE_LABEL) as T[]
 // Type is shown by a text label + a small marker; the marker shade alone never carries meaning.
-const DOT: Record<T, string> = { class: 'bg-primary', mentoring: 'bg-dim-mentoring', event: 'bg-dim-experiences', visit: 'bg-dim-participation', deadline: 'bg-warning', panel: 'bg-dim-venture', meeting: 'bg-muted-foreground' }
+const DOT: Record<T, string> = { class: 'bg-signal', mentoring: 'bg-dim-mentoring', event: 'bg-dim-experiences', visit: 'bg-dim-participation', deadline: 'bg-warning', panel: 'bg-dim-venture', meeting: 'bg-muted-foreground' }
 
 function linkFor(i: AgendaItem) {
   switch (i.source) {
@@ -70,7 +70,7 @@ export default function AgendaPage() {
   return (
     <div className="space-y-4">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Agenda</h1><p className="mt-1 text-muted-foreground first-letter:uppercase">{title}</p></div>
+        <div><p className="eyebrow mb-2">Sua semana</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Agenda</h1><p className="mt-1 text-muted-foreground first-letter:uppercase">{title}</p></div>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" onClick={() => exportIcs(items, `agenda-neolevel-${format(range.from, 'yyyy-MM-dd')}`)} disabled={!items.length}><Download /> Exportar (.ics)</Button>
           <Button onClick={() => setCreating(true)}><Plus /> Compromisso</Button>

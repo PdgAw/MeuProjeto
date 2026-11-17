@@ -81,7 +81,7 @@ function KpiCard({ kpi, editable, onRecord, onRemove }: { kpi: VentureKpi; edita
               <XAxis dataKey="label" padding={{ left: 12, right: 12 }} interval="preserveStartEnd" tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
               <YAxis hide domain={[0, 'auto']} />
               {target !== null && <ReferenceLine y={target} stroke="hsl(var(--muted-foreground))" strokeDasharray="4 4" />}
-              <Line dataKey="value" stroke="hsl(var(--primary))" strokeWidth={2} dot={{ r: 4, fill: 'hsl(var(--primary))', stroke: 'hsl(var(--card))', strokeWidth: 2 }} activeDot={{ r: 5 }} isAnimationActive={false} />
+              <Line dataKey="value" stroke="hsl(var(--primary-text))" strokeWidth={2} dot={{ r: 4, fill: 'hsl(var(--primary-text))', stroke: 'hsl(var(--card))', strokeWidth: 2 }} activeDot={{ r: 5 }} isAnimationActive={false} />
               <Tooltip cursor={{ stroke: 'hsl(var(--border))' }} content={({ active, payload }) => {
                 const p = payload?.[0]?.payload as { label: string; value: number } | undefined
                 if (!active || !p) return null

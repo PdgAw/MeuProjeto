@@ -32,7 +32,7 @@ export default function SubjectsPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold sm:text-3xl">Disciplinas</h1>
+          <p className="eyebrow mb-2">Acadêmico</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Disciplinas</h1>
           <p className="mt-1 text-muted-foreground">
             {user.dashboard === 'neoleader' ? 'As disciplinas da sua turma e o seu progresso em cada uma.' : 'Estrutura acadêmica da NeoLevel.'}
           </p>

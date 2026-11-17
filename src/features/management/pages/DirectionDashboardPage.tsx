@@ -39,7 +39,7 @@ export default function DirectionDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Visão executiva</h1><p className="mt-1 text-muted-foreground">Os Neoleaders estão evoluindo como empreendedores e líderes?</p></header>
+      <header><p className="eyebrow mb-2">Direção</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Visão executiva</h1><p className="mt-1 text-muted-foreground">Os Neoleaders estão evoluindo como empreendedores e líderes?</p></header>
       <div className="flex flex-wrap gap-2" aria-label="Filtros">
         <Select className="w-44" value={days} onChange={(e) => setDays(Number(e.target.value))} aria-label="Período">{PERIODS.map(([d, l]) => <option key={d} value={d}>{l}</option>)}</Select>
         <Select className="w-48" value={cohort} onChange={(e) => setCohort(e.target.value)} aria-label="Turma"><option value="">Todas as turmas</option>{cohorts.data?.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</Select>
@@ -71,7 +71,7 @@ export default function DirectionDashboardPage() {
                     <XAxis dataKey="label" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
                     <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
                     <Tooltip cursor={{ fill: 'hsl(var(--secondary))' }} content={<Tip />} />
-                    <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} maxBarSize={36} isAnimationActive={false} />
+                    <Bar dataKey="value" fill="hsl(var(--primary-text))" radius={[4, 4, 0, 0]} maxBarSize={36} isAnimationActive={false} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -84,7 +84,7 @@ export default function DirectionDashboardPage() {
                     <XAxis dataKey="label" padding={{ left: 12, right: 12 }} tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
                     <YAxis domain={[0, 100]} unit="%" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
                     <Tooltip cursor={{ stroke: 'hsl(var(--border))' }} content={<Tip unit="%" />} />
-                    <Line dataKey="value" stroke="hsl(var(--primary))" strokeWidth={2} connectNulls dot={{ r: 4, fill: 'hsl(var(--primary))', stroke: 'hsl(var(--card))', strokeWidth: 2 }} isAnimationActive={false} />
+                    <Line dataKey="value" stroke="hsl(var(--primary-text))" strokeWidth={2} connectNulls dot={{ r: 4, fill: 'hsl(var(--primary-text))', stroke: 'hsl(var(--card))', strokeWidth: 2 }} isAnimationActive={false} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -94,7 +94,7 @@ export default function DirectionDashboardPage() {
                 {VENTURE_STAGES.map((s) => {
                   const n = k.ventures_by_stage[s.key] ?? 0
                   return <li key={s.key} className="grid grid-cols-[6.5rem_minmax(0,1fr)_2rem] items-center gap-3 text-sm"><span className="text-muted-foreground">{s.label}</span>
-                    <span className="h-3 rounded-r-[4px] bg-secondary"><span className="block h-full rounded-r-[4px] bg-primary" style={{ width: `${(100 * n) / stageMax}%` }} /></span><span className="text-right tabular-nums">{n}</span></li>
+                    <span className="h-3 rounded-r-[4px] bg-secondary"><span className="block h-full rounded-r-[4px] bg-signal" style={{ width: `${(100 * n) / stageMax}%` }} /></span><span className="text-right tabular-nums">{n}</span></li>
                 })}
               </ul>
             </SectionCard>
@@ -105,7 +105,7 @@ export default function DirectionDashboardPage() {
                     {FUNNEL.map(([key, l]) => {
                       const n = funnel.data?.[key] ?? 0
                       return <li key={key} className="grid grid-cols-[8rem_minmax(0,1fr)_2rem] items-center gap-3 text-sm"><span className="text-muted-foreground">{l}</span>
-                        <span className="h-3 rounded-r-[4px] bg-secondary"><span className="block h-full rounded-r-[4px] bg-primary" style={{ width: `${(100 * n) / funnelMax}%` }} /></span><span className="text-right tabular-nums">{n}</span></li>
+                        <span className="h-3 rounded-r-[4px] bg-secondary"><span className="block h-full rounded-r-[4px] bg-signal" style={{ width: `${(100 * n) / funnelMax}%` }} /></span><span className="text-right tabular-nums">{n}</span></li>
                     })}
                   </ul>
                 )}

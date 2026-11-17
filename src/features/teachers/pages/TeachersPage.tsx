@@ -15,7 +15,7 @@ export default function TeachersPage() {
   const list = (data ?? []).filter((t) => !q || `${t.full_name} ${t.professional_profiles?.specialties.join(' ')} ${t.professional_profiles?.company ?? ''}`.toLowerCase().includes(q.toLowerCase()))
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Professores</h1><p className="mt-1 text-muted-foreground">Professores e professores convidados da NeoLevel.</p></header>
+      <header><p className="eyebrow mb-2">Gestão acadêmica</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Professores</h1><p className="mt-1 text-muted-foreground">Professores e professores convidados da NeoLevel.</p></header>
       <div className="relative max-w-sm"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input className="pl-9" placeholder="Buscar por nome, especialidade ou empresa" value={q} onChange={(e) => setQ(e.target.value)} /></div>
       {isPending ? <CardSkeleton lines={3} /> : !list.length ? <EmptyState text="Nenhum professor encontrado. Convide professores em Usuários." /> : (

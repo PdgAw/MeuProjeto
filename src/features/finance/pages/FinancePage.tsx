@@ -34,7 +34,7 @@ export default function FinancePage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Financeiro acadêmico</h1><p className="mt-1 text-muted-foreground">Contratos, bolsas e parcelas. Baixas manuais — sem gateway de pagamento nesta versão.</p></div>
+        <div><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Financeiro acadêmico</h1><p className="mt-1 text-muted-foreground">Contratos, bolsas e parcelas. Baixas manuais — sem gateway de pagamento nesta versão.</p></div>
         <div className="flex gap-2">
           <Button variant="outline" disabled={!all.length} onClick={() => downloadCsv(all.flatMap((a) => a.installments.map((i) => ({ Neoleader: a.student?.full_name, Turma: a.cohort?.name ?? '', Parcela: `${i.number}/${a.installments_count}`, Vencimento: i.due_date, Valor: Number(i.amount).toFixed(2).replace('.', ','), Situação: i.late ? 'Em atraso' : i.status, Pago_em: i.paid_at?.slice(0, 10) ?? '', Forma: i.payment_method ?? '' }))), 'financeiro-parcelas')}>Exportar CSV</Button>
           {hasPermission('finance.manage') && <NewAgreementDialog />}

@@ -98,9 +98,9 @@ export function AnnouncementFormDialog({ open, onOpenChange, announcement, onSav
             {v.when === 'schedule' && <FormField id="an-at" label="Data e hora"><Input id="an-at" type="datetime-local" value={v.at} onChange={(e) => setV({ ...v, at: e.target.value })} /></FormField>}
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary))]" checked={v.pinned} onChange={(e) => setV({ ...v, pinned: e.target.checked })} />Fixar no topo</label>
-            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary))]" checked={v.ack} onChange={(e) => setV({ ...v, ack: e.target.checked })} />Exigir confirmação de leitura</label>
-            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary))]" checked={v.draft} onChange={(e) => setV({ ...v, draft: e.target.checked })} />Salvar como rascunho</label>
+            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary-text))]" checked={v.pinned} onChange={(e) => setV({ ...v, pinned: e.target.checked })} />Fixar no topo</label>
+            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary-text))]" checked={v.ack} onChange={(e) => setV({ ...v, ack: e.target.checked })} />Exigir confirmação de leitura</label>
+            <label className="flex items-center gap-2"><input type="checkbox" className="h-4 w-4 accent-[hsl(var(--primary-text))]" checked={v.draft} onChange={(e) => setV({ ...v, draft: e.target.checked })} />Salvar como rascunho</label>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             {keep.map((f) => <span key={f.path} className="flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-xs">{f.name}<button type="button" onClick={() => setKeep(keep.filter((k) => k.path !== f.path))} aria-label="Remover anexo"><X className="h-3 w-3" /></button></span>)}

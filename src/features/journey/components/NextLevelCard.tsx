@@ -10,9 +10,9 @@ export function NextLevelCard({ item }: { item: JourneyItem }) {
   const met = item.requirements.filter((r) => r.met).length
   const total = item.requirements.length
   return (
-    <Card className="overflow-hidden border-primary/30">
-      <div className="bg-sidebar px-5 py-4 text-sidebar-foreground">
-        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+    <Card className="glow-neo overflow-hidden border-primary/30">
+      <div className="bg-brand-grid bg-sidebar px-5 py-4 text-sidebar-foreground">
+        <p className="flex items-center gap-2 font-display text-[11px] font-bold uppercase tracking-[0.22em] text-neo">
           <Rocket className="h-3.5 w-3.5" /> Seu próximo nível
         </p>
         <p className="mt-2 font-display text-xl font-semibold">{item.title}</p>
@@ -28,7 +28,7 @@ export function NextLevelCard({ item }: { item: JourneyItem }) {
                 <span className="font-medium">O que falta</span>
                 <span className="tabular-nums text-muted-foreground">{met}/{total}</span>
               </div>
-              <Progress value={(100 * met) / total} indicatorClassName="bg-accent" />
+              <Progress value={(100 * met) / total} indicatorClassName="bg-neo" />
             </div>
             <ul className="space-y-2">
               {item.requirements.map((r) => (

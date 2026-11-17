@@ -28,7 +28,7 @@ export default function RequestsQueuePage() {
   const unassigned = (data ?? []).filter((r) => r.status === 'open' && !r.assignee).length
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Solicitações</h1>
+      <header><p className="eyebrow mb-2">Secretaria</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Solicitações</h1>
         <p className="mt-1 text-muted-foreground">{(data ?? []).filter((r) => ['open', 'in_review'].includes(r.status)).length} em aberto · {unassigned} sem responsável</p></header>
       <div className="flex flex-wrap items-center gap-2">
         {FILTERS.map(([k, l]) => <button key={k} onClick={() => setF(k)} className={cn('rounded-full border px-3 py-1.5 text-sm font-medium', f === k ? 'border-primary bg-primary text-primary-foreground' : 'hover:bg-secondary')}>{l}</button>)}

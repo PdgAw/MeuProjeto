@@ -27,7 +27,7 @@ export default function StudentsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Neoleaders</h1><p className="mt-1 text-muted-foreground">{all.length} Neoleaders · {all.filter((s) => s.risk_flags.length).length} pedem atenção</p></div>
+        <div><p className="eyebrow mb-2">Gestão</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Neoleaders</h1><p className="mt-1 text-muted-foreground">{all.length} Neoleaders · {all.filter((s) => s.risk_flags.length).length} pedem atenção</p></div>
         <Button variant="outline" disabled={!list.length} onClick={() => downloadCsv(list.map((s) => ({ Nome: s.full_name, Turma: s.cohort_name, Trilha: s.track ? TRACK_LABEL[s.track] : '', 'Frequência %': s.attendance_rate ?? '', 'Entregas atrasadas': s.overdue_assignments, Negócio: s.venture_name ?? '', Estágio: s.venture_stage ? stageLabel(s.venture_stage) : '', Neomentor: s.mentor_name ?? '', Alertas: s.risk_flags.map((f) => RISK_SHORT[f]).join(', ') })), 'neoleaders')}>
           <Download /> Exportar CSV
         </Button>

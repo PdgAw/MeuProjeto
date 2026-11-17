@@ -27,7 +27,7 @@ export default function TeacherDashboardPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold sm:text-3xl">{greeting()}, {firstName(user.preferred_name || user.full_name)}.</h1>
+        <p className="eyebrow mb-2">Painel do professor</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{greeting()}, <span className="text-primary">{firstName(user.preferred_name || user.full_name)}</span>.</h1>
         <p className="mt-1 text-muted-foreground">Suas aulas, turmas e entregas para avaliar.</p>
       </header>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

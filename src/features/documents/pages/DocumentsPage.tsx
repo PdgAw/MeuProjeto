@@ -50,7 +50,7 @@ export default function DocumentsPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Documentos</h1><p className="mt-1 text-muted-foreground">Contratos, termos, certificados e materiais oficiais, em armazenamento privado.</p></div>
+        <div><p className="eyebrow mb-2">Comunicação</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Documentos</h1><p className="mt-1 text-muted-foreground">Contratos, termos, certificados e materiais oficiais, em armazenamento privado.</p></div>
         {canUpload && <Button onClick={() => setUploading(null)}><Plus /> Novo documento</Button>}
       </header>
       <div className="flex flex-wrap items-center gap-2">

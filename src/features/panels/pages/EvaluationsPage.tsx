@@ -13,7 +13,7 @@ export default function EvaluationsPage() {
   const pending = (data ?? []).filter((s) => !s.mine?.submitted_at).length
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">Avaliações de banca</h1>
+      <header><p className="eyebrow mb-2">Bancas</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Avaliações de banca</h1>
         <p className="mt-1 text-muted-foreground">{pending ? `${pending} pitch${pending > 1 ? 'es' : ''} aguardando sua avaliação.` : 'Pitches das bancas em que você é avaliador.'}</p></header>
       {isPending ? <CardSkeleton lines={3} /> : !data?.length ? <EmptyState text="Nenhum pitch para avaliar. Você verá aqui os pitches das bancas em que for avaliador." /> : (
         <ul className="divide-y rounded-lg border bg-card">

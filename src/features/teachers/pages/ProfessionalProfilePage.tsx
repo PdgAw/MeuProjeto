@@ -37,7 +37,7 @@ export default function ProfessionalProfilePage() {
           <div className="flex items-end gap-4">
             <Avatar className="h-20 w-20 border-4 border-card">{p.avatar_url && <AvatarImage src={p.avatar_url} alt="" />}<AvatarFallback className="text-xl">{initials(p.full_name)}</AvatarFallback></Avatar>
             <div className="pb-1">
-              <h1 className="text-2xl font-semibold">{p.full_name}</h1>
+              <p className="eyebrow mb-2">Professor</p><h1 className="text-2xl font-bold leading-tight sm:text-[1.75rem]">{p.full_name}</h1>
               <p className="text-muted-foreground">{p.pro?.headline ?? p.job_title}</p>
             </div>
           </div>

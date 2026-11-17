@@ -34,7 +34,7 @@ export default function ExperiencesPage() {
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Experiências Neo</h1>
+        <div><p className="eyebrow mb-2">Ecossistema</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Experiências Neo</h1>
           <p className="mt-1 text-muted-foreground">Visitas empresariais, Neomeetings, Conexões Neo, missões e encontros: o aprendizado fora da sala.</p></div>
         {manage && <Button onClick={() => setCreating(true)}><Plus /> Nova experiência</Button>}
       </header>

@@ -16,7 +16,7 @@ export default function SecretaryDashboardPage() {
   if (!user) return null
   return (
     <div className="space-y-6">
-      <header><h1 className="text-2xl font-semibold sm:text-3xl">{greeting()}, {firstName(user.preferred_name || user.full_name)}.</h1><p className="mt-1 text-muted-foreground">Cadastros, matrículas, solicitações e financeiro.</p></header>
+      <header><p className="eyebrow mb-2">Secretaria</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">{greeting()}, <span className="text-primary">{firstName(user.preferred_name || user.full_name)}</span>.</h1><p className="mt-1 text-muted-foreground">Cadastros, matrículas, solicitações e financeiro.</p></header>
       {isPending || !data ? <CardSkeleton lines={4} /> : (
         <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
           <SectionCard title="Solicitações em aberto" icon={<Inbox className="h-4 w-4 text-primary" />} action={{ label: 'Todas', to: '/gestao/solicitacoes' }}>

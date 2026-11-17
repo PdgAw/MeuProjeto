@@ -46,7 +46,7 @@ export function FamilyBusinessCard({ ownerId, editable }: { ownerId: string; edi
         }}>
           <div className="grid gap-4 sm:grid-cols-2">{SHORT.map(([k, l]) => <FormField key={k} id={`fb-${k}`} label={l}><Input id={`fb-${k}`} value={v[k] ?? ''} onChange={(e) => setV({ ...v, [k]: e.target.value })} /></FormField>)}</div>
           <div className="grid gap-4 sm:grid-cols-2">{TEXT.map(([k, l]) => <FormField key={k} id={`fb-${k}`} label={l}><Textarea id={`fb-${k}`} rows={2} value={v[k] ?? ''} onChange={(e) => setV({ ...v, [k]: e.target.value })} /></FormField>)}</div>
-          <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={share} onChange={(e) => setShare(e.target.checked)} className="h-4 w-4 accent-[hsl(var(--primary))]" />Compartilhar com meus Neomentores</label>
+          <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={share} onChange={(e) => setShare(e.target.checked)} className="h-4 w-4 accent-[hsl(var(--primary-text))]" />Compartilhar com meus Neomentores</label>
           <div className="flex justify-end gap-2">{data && <Button type="button" variant="outline" onClick={() => setEditing(false)}>Cancelar</Button>}<Button type="submit" disabled={save.isPending}>{save.isPending && <Loader2 className="animate-spin" />}Salvar</Button></div>
         </form>
       </CardContent></Card>

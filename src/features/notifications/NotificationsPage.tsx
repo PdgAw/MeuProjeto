@@ -27,7 +27,7 @@ export default function NotificationsPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div><h1 className="text-2xl font-semibold sm:text-3xl">Notificações</h1><p className="mt-1 text-muted-foreground">{unread ? `${unread} não lida${unread > 1 ? 's' : ''}` : 'Tudo em dia.'}</p></div>
+        <div><p className="eyebrow mb-2">Central de avisos</p><h1 className="text-[1.75rem] font-bold leading-tight sm:text-[2rem]">Notificações</h1><p className="mt-1 text-muted-foreground">{unread ? `${unread} não lida${unread > 1 ? 's' : ''}` : 'Tudo em dia.'}</p></div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => setUnreadOnly(!unreadOnly)}>{unreadOnly ? 'Mostrar todas' : 'Só não lidas'}</Button>
           <Button variant="outline" disabled={!unread || readAll.isPending} onClick={() => readAll.mutate()}><CheckCheck /> Marcar todas como lidas</Button>
@@ -49,7 +49,7 @@ export default function NotificationsPage() {
                       {n.body && <span className="block truncate text-sm text-muted-foreground">{n.body}</span>}
                       <span className="text-xs text-muted-foreground">{fmtRelative(n.created_at)}</span>
                     </span>
-                    {!n.read_at && <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" aria-label="Não lida" />}
+                    {!n.read_at && <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-signal" aria-label="Não lida" />}
                   </button>
                 </li>
               )
