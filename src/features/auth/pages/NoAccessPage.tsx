@@ -10,7 +10,7 @@ export default function NoAccessPage() {
   const byStatus = params.get('motivo') === 'status'
 
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center gap-6 px-4 text-center">
+    <div className="bg-brand-grid flex min-h-dvh flex-col items-center justify-center gap-6 px-4 text-center">
       <Logo />
       <ShieldAlert className="h-10 w-10 text-warning" />
       <div className="max-w-md space-y-2">

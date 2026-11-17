@@ -2,29 +2,38 @@ import { cn } from '@/lib/utils'
 
 interface LogoProps {
   className?: string
-  /** Show the "Business School" caption next to the wordmark. */
+  /** Show the "Business School" caption under the wordmark. */
   withCaption?: boolean
-  tone?: 'dark' | 'light'
+  /**
+   * `negative`: white "level" for navy grounds (sidebar, brand panels) — the official logo.
+   * `auto`: follows the theme (negative on dark, positive on light).
+   * `symbol`: the "neo" mark with its signal waves only.
+   */
+  variant?: 'auto' | 'negative' | 'symbol'
 }
 
-export function Logo({ className, withCaption = false, tone = 'dark' }: LogoProps) {
+/** Official NeoLevel logo files (see the brand manual, group "Logos"). Never redraw it. */
+export function Logo({ className, withCaption = false, variant = 'auto' }: LogoProps) {
+  if (variant === 'symbol') {
+    return <img src="/brand/neolevel-simbolo.png" alt="NeoLevel" className={cn('h-7 w-auto', className)} />
+  }
   return (
-    <div className={cn('flex items-center gap-2.5', className)}>
-      <svg viewBox="0 0 64 64" className="h-8 w-8 shrink-0" aria-hidden="true">
-        <rect width="64" height="64" rx="14" fill={tone === 'light' ? '#F5F7FF' : '#0B1020'} />
-        <path d="M18 46V18h6l16 18V18h6v28h-6L24 28v18z" fill={tone === 'light' ? '#0B1020' : '#F5F7FF'} />
-        <rect x="40" y="12" width="12" height="4" rx="2" fill="#C8F25A" />
-      </svg>
-      <div className="leading-none">
-        <span className="font-display text-lg font-bold tracking-tight">
-          Neo<span className="text-primary">Level</span>
+    <div className={cn('flex flex-col items-start gap-1', className)}>
+      <img
+        src="/brand/neolevel-logo-negativo.png"
+        alt="NeoLevel"
+        width={473}
+        height={126}
+        className={cn('h-8 w-auto', variant === 'auto' && 'light:hidden')}
+      />
+      {variant === 'auto' && (
+        <img src="/brand/neolevel-logo-positivo.png" alt="NeoLevel" width={473} height={126} className="hidden h-8 w-auto light:block" />
+      )}
+      {withCaption && (
+        <span className={cn('pl-0.5 font-display text-[9px] font-bold uppercase tracking-[0.3em]', variant === 'negative' ? 'text-neo' : 'text-primary')}>
+          Business School
         </span>
-        {withCaption && (
-          <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.18em] opacity-60">
-            Business School
-          </span>
-        )}
-      </div>
+      )}
     </div>
   )
 }

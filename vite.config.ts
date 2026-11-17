@@ -8,20 +8,20 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.png', 'apple-touch-icon.png', 'brand/*.png'],
       manifest: {
         name: 'NeoLevel Business School',
         short_name: 'NeoLevel',
         description: 'Plataforma oficial da NeoLevel Business School.',
         lang: 'pt-BR',
-        theme_color: '#0B1020',
-        background_color: '#0B1020',
+        theme_color: '#0E1A2B',
+        background_color: '#0E1A2B',
         display: 'standalone',
         start_url: '/',
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'pwa-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {

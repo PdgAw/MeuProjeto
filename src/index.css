@@ -3,83 +3,103 @@
 @tailwind utilities;
 
 /*
- * NeoLevel design tokens.
- * Ink navy for authority, electric "neo" blue for action, lime for progress/level-up.
+ * NeoLevel design tokens — see the brand manual (Design System "NeoLevel").
+ * Dark first, like neolevel.com.br: deep navy grounds, electric cyan as the signal.
+ * `.light` on <html> switches to the light theme. The sidebar stays navy in both.
+ * `--primary` is the cyan FILL (always with --primary-foreground navy text);
+ * cyan used as TEXT/BORDER goes through --primary-text (darker teal in light theme).
  */
 @layer base {
   :root {
-    --background: 225 33% 98%;
-    --foreground: 226 45% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 226 45% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 226 45% 9%;
-    --primary: 232 89% 58%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 226 30% 94%;
-    --secondary-foreground: 226 45% 12%;
-    --muted: 226 25% 95%;
-    --muted-foreground: 226 12% 42%;
-    --accent: 80 85% 65%;
-    --accent-foreground: 226 45% 9%;
-    --destructive: 0 74% 52%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 152 62% 36%;
-    --success-foreground: 0 0% 100%;
-    --warning: 36 95% 48%;
-    --warning-foreground: 226 45% 9%;
-    --border: 226 22% 89%;
-    --input: 226 22% 86%;
-    --ring: 232 89% 58%;
-    --radius: 0.75rem;
-
-    --sidebar: 228 48% 8%;
-    --sidebar-foreground: 226 30% 92%;
-    --sidebar-muted: 226 16% 62%;
-    --sidebar-accent: 228 36% 15%;
-    --sidebar-border: 228 30% 16%;
-
-    --dim-learning: 232 89% 58%;
-    --dim-execution: 14 88% 56%;
-    --dim-mentoring: 268 70% 58%;
-    --dim-participation: 190 80% 42%;
-    --dim-venture: 80 70% 42%;
-    --dim-experiences: 330 75% 55%;
-    --dim-goals: 42 92% 50%;
+    --background: 215 51% 11%;
+    --foreground: 0 0% 100%;
+    --text: 0 0% 85%;
+    --card: 219 53% 15%;
+    --card-foreground: 0 0% 100%;
+    --popover: 219 48% 20%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 180 96% 50%;
+    --primary-foreground: 215 51% 11%;
+    --primary-text: 180 96% 50%;
+    --secondary: 219 48% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 48% 17%;
+    --muted-foreground: 218 20% 63%;
+    --accent: 200 68% 20%;
+    --accent-foreground: 180 96% 50%;
+    --destructive: 359 100% 70%;
+    --destructive-foreground: 215 51% 11%;
+    --success: 154 69% 55%;
+    --success-foreground: 215 51% 11%;
+    --warning: 36 100% 64%;
+    --warning-foreground: 215 51% 11%;
+    --border: 219 32% 23%;
+    --input: 219 21% 30%;
+    --ring: 180 96% 50%;
+    --sidebar: 215 59% 6%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-muted: 218 20% 63%;
+    --sidebar-accent: 194 77% 10%;
+    --sidebar-border: 214 26% 12%;
+    --dim-learning: 180 96% 50%;
+    --dim-execution: 24 100% 62%;
+    --dim-mentoring: 260 100% 77%;
+    --dim-participation: 214 100% 65%;
+    --dim-venture: 154 69% 55%;
+    --dim-experiences: 334 100% 72%;
+    --dim-goals: 42 100% 65%;
+    --radius: 1rem;
   }
 
-  .dark {
-    --background: 228 48% 6%;
-    --foreground: 226 30% 94%;
-    --card: 228 40% 9%;
-    --card-foreground: 226 30% 94%;
-    --popover: 228 40% 9%;
-    --popover-foreground: 226 30% 94%;
-    --primary: 232 95% 68%;
-    --primary-foreground: 228 48% 6%;
-    --secondary: 228 30% 15%;
-    --secondary-foreground: 226 30% 94%;
-    --muted: 228 30% 13%;
-    --muted-foreground: 226 15% 64%;
-    --accent: 80 85% 65%;
-    --accent-foreground: 228 48% 6%;
-    --destructive: 0 72% 58%;
+  .light {
+    --background: 214 41% 97%;
+    --foreground: 215 51% 11%;
+    --text: 218 32% 24%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 51% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 51% 11%;
+    --primary: 180 96% 50%;
+    --primary-foreground: 215 51% 11%;
+    --primary-text: 184 100% 24%;
+    --secondary: 212 45% 94%;
+    --secondary-foreground: 215 51% 11%;
+    --muted: 213 36% 95%;
+    --muted-foreground: 219 17% 43%;
+    --accent: 180 95% 92%;
+    --accent-foreground: 184 100% 21%;
+    --destructive: 359 59% 50%;
     --destructive-foreground: 0 0% 100%;
-    --success: 152 55% 45%;
+    --success: 158 85% 26%;
     --success-foreground: 0 0% 100%;
-    --warning: 38 92% 55%;
-    --warning-foreground: 228 48% 6%;
-    --border: 228 28% 17%;
-    --input: 228 28% 20%;
-    --ring: 232 95% 68%;
-
-    --sidebar: 228 50% 5%;
-    --sidebar-accent: 228 36% 12%;
-    --sidebar-border: 228 30% 13%;
+    --warning: 35 100% 30%;
+    --warning-foreground: 0 0% 100%;
+    --border: 217 35% 90%;
+    --input: 217 26% 78%;
+    --ring: 184 100% 24%;
+    --sidebar: 219 53% 15%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-muted: 218 22% 65%;
+    --sidebar-accent: 202 65% 19%;
+    --sidebar-border: 219 33% 22%;
+    --dim-learning: 184 100% 24%;
+    --dim-execution: 17 88% 40%;
+    --dim-mentoring: 254 71% 58%;
+    --dim-participation: 218 75% 48%;
+    --dim-venture: 158 85% 26%;
+    --dim-experiences: 336 78% 43%;
+    --dim-goals: 40 100% 29%;
   }
 
   * {
     @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+  html.light {
+    color-scheme: light;
   }
 
   html,
@@ -89,13 +109,50 @@
   }
 
   body {
-    @apply bg-background font-sans text-foreground antialiased;
+    @apply bg-background font-sans antialiased;
+    color: hsl(var(--text));
     font-feature-settings: 'cv11', 'ss01';
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display tracking-tight;
+    @apply font-display tracking-tight text-foreground;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline-color: hsl(var(--ring));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Sobretítulo de seção, como no site: CAIXA ALTA espaçada em ciano. */
+  .eyebrow {
+    @apply font-display text-[11px] font-bold uppercase tracking-[0.22em] text-primary;
+  }
+  /* Grade fina de marca (telas de entrada, heros, vazios). */
+  .bg-brand-grid {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .glow-neo {
+    box-shadow: 0 0 0 1px hsl(var(--primary-text) / 0.3), 0 12px 40px hsl(var(--primary) / 0.12);
+  }
+  .card-elev {
+    box-shadow: 0 1px 0 hsl(0 0% 100% / 0.04) inset, 0 12px 32px hsl(220 59% 6% / 0.35);
+  }
+  .light .card-elev {
+    box-shadow: 0 1px 2px hsl(215 51% 11% / 0.06), 0 8px 24px hsl(215 51% 11% / 0.05);
   }
 }

@@ -6,7 +6,7 @@ export function Toaster() {
       position="top-right"
       toastOptions={{
         classNames: {
-          toast: 'group border bg-card text-card-foreground shadow-lg rounded-lg',
+          toast: 'group border bg-popover text-popover-foreground shadow-2xl rounded-md font-sans',
           description: 'text-muted-foreground',
         },
       }}

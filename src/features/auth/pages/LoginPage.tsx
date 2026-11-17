@@ -33,7 +33,7 @@ export default function LoginPage() {
     <AuthLayout title="Entrar na NeoLevel" description="Acesso exclusivo para Neoleaders, Neomentores, professores e equipe.">
       <form onSubmit={onSubmit} className="space-y-5" noValidate>
         {error && (
-          <div role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          <div role="alert" className="rounded-md border border-destructive/40 bg-destructive/10 px-3.5 py-2.5 text-sm font-medium text-destructive">
             {error}
           </div>
         )}

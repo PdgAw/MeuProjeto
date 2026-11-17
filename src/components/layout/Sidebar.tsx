@@ -9,7 +9,7 @@ interface SidebarProps {
   onToggle: () => void
 }
 
-/** Desktop sidebar — fixed, collapsible to icons. */
+/** Desktop sidebar — always navy (brand signature), collapsible to icons. */
 export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const sections = useNavigation()
   return (
@@ -19,14 +19,14 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         collapsed ? 'w-[72px]' : 'w-64',
       )}
     >
-      <div className={cn('flex h-16 items-center', collapsed ? 'justify-center' : 'px-5')}>
-        {collapsed ? <Logo className="[&>div]:hidden" tone="light" /> : <Logo withCaption tone="light" />}
+      <div className={cn('flex h-[72px] items-center', collapsed ? 'justify-center' : 'px-6')}>
+        {collapsed ? <Logo variant="symbol" className="h-6" /> : <Logo withCaption variant="negative" className="[&>img]:h-7" />}
       </div>
-      <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4" aria-label="Navegação principal">
+      <nav className="flex-1 space-y-6 overflow-y-auto px-3 pb-4 pt-2" aria-label="Navegação principal">
         {sections.map((section, i) => (
-          <div key={section.title ?? i} className="space-y-1">
+          <div key={section.title ?? i} className="space-y-0.5">
             {section.title && !collapsed && (
-              <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-sidebar-muted">{section.title}</p>
+              <p className="px-3 pb-2 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-sidebar-muted">{section.title}</p>
             )}
             {section.items.map(({ key, label, path, icon: Icon }) => (
               <NavLink
@@ -36,17 +36,17 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 title={collapsed ? label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    'group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                    'relative flex h-10 items-center gap-3 rounded-md px-3 text-sm font-medium transition-colors',
                     collapsed && 'justify-center px-0',
                     isActive
-                      ? 'bg-sidebar-accent text-white'
-                      : 'text-sidebar-muted hover:bg-sidebar-accent/60 hover:text-sidebar-foreground',
+                      ? 'bg-sidebar-accent text-white before:absolute before:inset-y-2.5 before:left-0 before:w-[3px] before:rounded-full before:bg-neo'
+                      : 'text-sidebar-foreground/75 hover:bg-white/5 hover:text-white',
                   )
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <Icon className={cn('h-[18px] w-[18px] shrink-0', isActive && 'text-accent')} />
+                    <Icon className={cn('h-[18px] w-[18px] shrink-0', isActive && 'text-neo')} />
                     {!collapsed && <span className="truncate">{label}</span>}
                   </>
                 )}
@@ -57,7 +57,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       </nav>
       <button
         onClick={onToggle}
-        className="flex h-12 items-center justify-center gap-2 border-t border-sidebar-border text-xs text-sidebar-muted hover:text-sidebar-foreground"
+        className="flex h-12 items-center justify-center gap-2 border-t border-sidebar-border text-xs font-medium text-sidebar-muted transition-colors hover:text-white"
         aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
       >
         {collapsed ? <ChevronsRight className="h-4 w-4" /> : <><ChevronsLeft className="h-4 w-4" /> Recolher</>}

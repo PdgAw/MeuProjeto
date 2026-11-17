@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
+import plugin from 'tailwindcss/plugin'
 
 const token = (name: string) => `hsl(var(--${name}) / <alpha-value>)`
 
@@ -14,11 +15,15 @@ export default {
         display: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
+        // Fixed brand colors (same in both themes): use on navy brand surfaces only.
+        neo: '#06F9FA',
+        navy: { 950: '#060D17', 900: '#0E1A2B', 800: '#12203A', 700: '#1A2B4A' },
         border: token('border'),
         input: token('input'),
         ring: token('ring'),
         background: token('background'),
         foreground: token('foreground'),
+        body: token('text'),
         primary: { DEFAULT: token('primary'), foreground: token('primary-foreground') },
         secondary: { DEFAULT: token('secondary'), foreground: token('secondary-foreground') },
         muted: { DEFAULT: token('muted'), foreground: token('muted-foreground') },
@@ -46,12 +51,22 @@ export default {
           goals: token('dim-goals'),
         },
       },
+      // Cyan as text/border/ring uses --primary-text (teal on light); bg-primary stays the cyan fill.
+      textColor: { primary: { DEFAULT: token('primary-text'), foreground: token('primary-foreground') } },
+      borderColor: { primary: { DEFAULT: token('primary-text'), foreground: token('primary-foreground') } },
+      ringColor: { primary: { DEFAULT: token('primary-text'), foreground: token('primary-foreground') } },
+      divideColor: { primary: { DEFAULT: token('primary-text'), foreground: token('primary-foreground') } },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        md: 'calc(var(--radius) - 8px)',
+        sm: 'calc(var(--radius) - 10px)',
+        xl: 'calc(var(--radius) + 4px)',
       },
     },
   },
-  plugins: [animate],
+  plugins: [
+    animate,
+    // `light:` variant for the rare spots that differ by theme (e.g. which logo file to show).
+    plugin(({ addVariant }) => addVariant('light', '.light &')),
+  ],
 } satisfies Config

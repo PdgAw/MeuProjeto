@@ -19,7 +19,7 @@ export const TERMS = {
 export const APP = {
   name: 'NeoLevel',
   fullName: 'NeoLevel Business School',
-  tagline: 'Formação prática de empreendedores, líderes e sucessores.',
+  tagline: 'A próxima geração de líderes está sendo formada aqui.',
   city: 'Florianópolis, SC',
   ecosystem: 'Academia FIESC de Negócios',
 } as const

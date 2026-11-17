@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-sidebar-border bg-sidebar/95 pb-[env(safe-area-inset-bottom)] text-sidebar-foreground backdrop-blur-md lg:hidden"
       aria-label="Navegação"
     >
       <div className="grid grid-cols-5">
@@ -27,7 +27,7 @@ export function BottomNav() {
             to={path}
             end={key === 'home'}
             className={({ isActive }) =>
-              cn('flex flex-col items-center gap-1 py-2 text-[11px] font-medium', isActive ? 'text-primary' : 'text-muted-foreground')
+              cn('relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors', isActive ? 'text-neo before:absolute before:inset-x-6 before:top-0 before:h-0.5 before:rounded-full before:bg-neo' : 'text-sidebar-foreground/70')
             }
           >
             <Icon className="h-5 w-5" />
@@ -36,13 +36,13 @@ export function BottomNav() {
         ))}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
-            className={cn('flex flex-col items-center gap-1 py-2 text-[11px] font-medium', restActive ? 'text-primary' : 'text-muted-foreground')}
+            className={cn('flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium', restActive ? 'text-neo' : 'text-sidebar-foreground/70')}
           >
             <Menu className="h-5 w-5" />
             Mais
           </SheetTrigger>
           <SheetContent side="bottom" title="Mais opções" className="px-4 pb-6 pt-5">
-            <p className="mb-4 font-display text-base font-semibold">Mais</p>
+            <p className="eyebrow mb-4">Mais destinos</p>
             <div className="grid grid-cols-3 gap-2">
               {rest.map(({ key, label, path, icon: Icon }) => (
                 <NavLink
@@ -52,8 +52,8 @@ export function BottomNav() {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'flex flex-col items-center gap-2 rounded-lg border p-3 text-center text-xs font-medium',
-                      isActive ? 'border-primary bg-primary/5 text-primary' : 'text-foreground',
+                      'flex flex-col items-center gap-2 rounded-md border bg-secondary/40 p-3 text-center text-xs font-medium transition-colors',
+                      isActive ? 'border-primary bg-primary/10 text-primary' : 'text-foreground hover:bg-secondary',
                     )
                   }
                 >
